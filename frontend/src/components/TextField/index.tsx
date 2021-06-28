@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface TextFieldProps {
-  label: string;
+  label?: string;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   hint?: string;
@@ -15,9 +15,13 @@ function TextField ({ InputProps, hint, label, value, setValue }: TextFieldProps
 
   return (
     <div className="Vlt-form__element">
-      <label className="Vlt-label">
-        {label}
-      </label>
+      {
+        label && (
+          <label className="Vlt-label">
+            {label}
+          </label>
+        )
+      }
       <div className="Vlt-input">
         <input
           {...InputProps}

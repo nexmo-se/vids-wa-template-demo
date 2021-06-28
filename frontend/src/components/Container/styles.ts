@@ -3,7 +3,6 @@ export default makeStyles((theme) => ({
   container: {
     padding: theme.spacing(4),
     margin: "0 auto",
-    height: "100%",
-    overflow: "hidden"
+    height: "100%"
   }
 }), { index: 1 })
