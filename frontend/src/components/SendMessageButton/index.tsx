@@ -1,4 +1,5 @@
 import Config from "configs";
+import lodash from "lodash";
 
 import { useState } from "react";
 import { useTemplate } from "components/TemplateProvider";
@@ -13,6 +14,11 @@ function SendMessageButton() {
 
       if (!selectedTemplate) return;
       if (!targetPhoneNumber) return;
+
+      const components = lodash([
+        selectedTemplate.headerPayload(),
+        selectedTemplate.bodyPayload()
+      ]).compact().value();
     
       const url = `${Config.apiUrl}/whatsapp-templates`;
       const body = JSON.stringify({
@@ -35,10 +41,7 @@ function SendMessageButton() {
                 policy: "deterministic",
                 code: "en"
               },
-              components: [
-                selectedTemplate.headerPayload(),
-                selectedTemplate.bodyPayload()
-              ]
+              components
             }
           }
         }
