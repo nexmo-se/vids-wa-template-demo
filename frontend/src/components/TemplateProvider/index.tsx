@@ -60,6 +60,11 @@ function TemplateProvider({ children }: ITemplateProvider) {
             value: "video"
           },
           body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}."
+        }),
+        new Template({
+          id: "demo_cse_delivery_apac",
+          namespace: "whatsapp:hsm:technology:nexmo",
+          body: "Thank you for ordering with Nexmo Delivery.\nYour order is being shipped.\n\nOrder: {{1}} - {{2}}\nStatus: {{3}}\nDate: {{4}}\nTime: {{5}}\nAddress: {{6}}"
         })
       ])
     },

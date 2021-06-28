@@ -1,8 +1,48 @@
+import lodash from "lodash";
+
 import useStyles from "./styles";
+import { useTemplate } from "components/TemplateProvider";
+
 import { Box } from "@material-ui/core";
+import { createElement } from "react";
 
 function BodySection () {
   const mStyles = useStyles();
+  const { selectedTemplate } = useTemplate();
+
+  /**
+   * Generate body based on the `selectedTemplate.body`. This will convert
+   * \n to <br />. Furthermore it will convert the {{1}} paramters
+   * to certain component.
+   * @returns 
+   */
+  function generateBody () {
+    if (!selectedTemplate) return;
+
+    const splittedString = selectedTemplate.body.split(/\n/g);
+    const elements = lodash(splittedString)
+    .map(
+      (string) => {
+        const breakline = createElement("br");
+        const splittedInput = string.split(/{{\d+}}/g);
+        if (splittedInput.length === 1) {
+          const span = createElement("span", null, string);
+          return [span, breakline];
+        } else {
+          const elements = lodash(splittedInput).slice(0, -1).map(
+            (string) => {
+              const span = createElement("span", null, string);
+              const input = createElement("input", { type: "text", size: 20 });
+              const inputContainer = createElement("div", { className: "Vlt-input" }, input);
+              return [span, inputContainer]
+            }
+          ).value()
+          return [elements, breakline]
+        }
+      }
+    ).flattenDeep().value()
+    return elements;
+  }
 
   return (
     <Box
@@ -18,23 +58,7 @@ function BodySection () {
       <Box className="Vlt-card__content">
         <div className={mStyles.content}>
           <div className="Vlt-form__element Vlt-form__element--elastic">
-            <span>Hi&nbsp;</span>
-            <div className="Vlt-input">
-              <input type="text" size={5} />
-            </div>
-            <span>, Here is your Boarding Pass for your flight&nbsp;</span>
-            <div className="Vlt-input">
-              <input type="text" size={5} />
-            </div>
-            <span>&nbsp;from&nbsp;</span>
-            <div className="Vlt-input">
-              <input type="text" size={5} />
-            </div>
-            <span>&nbsp;to&nbsp;</span>
-            <div className="Vlt-input">
-              <input type="text" size={4} />
-            </div>
-            <span>.</span>
+            {generateBody()}
           </div>
         </div>
       </Box>
