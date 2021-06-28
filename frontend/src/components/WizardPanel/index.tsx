@@ -1,26 +1,33 @@
-import TemplateDropdown from "./components/TemplateDropdown";
+import SelectTemplateSection from "./components/SelectTemplateSection";
 import SendToSection from "./components/SendToSection";
-import { Grid, Box } from "@material-ui/core";
+import HeaderSection from "./components/HeaderSection";
+import BodySection from "./components/BodySection";
+import { Grid } from "@material-ui/core";
 
 function WizardPanel() {
   return (
-    <Grid container>
-      <Grid xs={12} item>
-        <SendToSection />
+    <Grid spacing={2} container>
+      <Grid
+        xs={12}
+        spacing={2}
+        alignItems="stretch"
+        container
+        item
+      >
+        <Grid xs={6} item>
+          <SendToSection />
+        </Grid>
+        <Grid xs={6} item>
+          <SelectTemplateSection />
+        </Grid>
       </Grid>
 
       <Grid xs={12} item>
-        <Box className="Vlt-card Vlt-card--border Vlt-bg-white">
-          <Box className="Vlt-card__header">
-            <h5>Select Template</h5>
-            <p>
-              Please select template to be sent.
-            </p>
-          </Box>
-          <Box className="Vlt-card__content">
-            <TemplateDropdown />
-          </Box>
-        </Box>
+        <HeaderSection />
+      </Grid>
+
+      <Grid xs={12} item>
+        <BodySection />
       </Grid>
     </Grid>
   )

@@ -26,15 +26,6 @@ function TemplateProvider({ children }: ITemplateProvider) {
           body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}."
         }),
         new Template({
-          id: "airline_ticket_update_text",
-          namespace: "whatsapp:hsm:technology:nexmo",
-          header: {
-            type: "text",
-            value: "Flight {{1}}"
-          },
-          body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}. Link {{5}}"
-        }),
-        new Template({
           id: "airline_ticket_update_location",
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {

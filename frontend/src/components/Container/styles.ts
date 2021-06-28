@@ -1,8 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     margin: "0 auto",
-    height: "100%"
+    height: "100%",
+    overflow: "hidden"
   }
 }), { index: 1 })

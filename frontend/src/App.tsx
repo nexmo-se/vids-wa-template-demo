@@ -8,9 +8,6 @@ import SendMessageButton from "components/SendMessageButton";
 import { Box, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  mainContainer: {
-    overflowY: "auto"
-  },
   header: {
     display: "flex",
     justifyContent: "space-between",
@@ -30,7 +27,7 @@ function App() {
           </h2>
           <SendMessageButton />
         </Box>
-        <Grid className={mStyles.mainContainer} container>
+        <Grid container>
           <Grid xs={8} item>
             <WizardPanel />
           </Grid>

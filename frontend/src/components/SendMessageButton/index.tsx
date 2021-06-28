@@ -12,7 +12,7 @@ function SendMessageButton() {
       setSending(true);
 
       if (selectedTemplate) {
-        const url = `${Config.apiURL}/whatsapp-templates`;
+        const url = `${Config.apiUrl}/whatsapp-templates`;
         const body = JSON.stringify({
           from: {
             type: "whatsapp",
@@ -27,8 +27,8 @@ function SendMessageButton() {
             custom: {
               type: "template",
               template: {
-                namespace: selectedTemplate.namespace,
-                name: selectedTemplate.id,
+                namespace: "whatsapp:hsm:technology:nexmo",
+                name: "airline_ticket_update",
                 language: {
                   policy: "deterministic",
                   code: "en"
@@ -37,8 +37,10 @@ function SendMessageButton() {
                   {
                     type: "header",
                     parameters: [{
-                      type: "text",
-                      text: "GA 123"
+                      type: "document",
+                      document: {
+                        link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                      }
                     }]
                   },
                   {
@@ -59,10 +61,6 @@ function SendMessageButton() {
                       {
                         type: "text",
                         text: "Singapore"
-                      },
-                      {
-                        type: "text",
-                        text: "https://vonage.id"
                       }
                     ]
                   }

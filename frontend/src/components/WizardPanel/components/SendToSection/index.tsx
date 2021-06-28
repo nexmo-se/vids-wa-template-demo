@@ -8,11 +8,15 @@ function SendToSection() {
   const { setTargetPhoneNumber } = useTemplate();
 
   function handleChange(phone: string) {
-    console.log(phone);
+    if (!setTargetPhoneNumber) return;
+    setTargetPhoneNumber(phone);
   }
 
   return (
-    <Box className="Vlt-card Vlt-card--border Vlt-bg-white">
+    <Box
+      height={1}
+      className="Vlt-card Vlt-card--border Vlt-bg-white"
+    >
       <Box className="Vlt-card__header">
         <h5>Send to</h5>
         <p>
