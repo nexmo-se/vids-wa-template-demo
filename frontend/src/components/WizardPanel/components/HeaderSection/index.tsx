@@ -17,7 +17,7 @@ function HeaderSection () {
           setValue={() => {}}
         />
       )
-    } else if (type === "url") {
+    } else if (["document", "image", "video"]) {
       return (
         <TextField
           label="URL"
