@@ -1,6 +1,7 @@
 import Template from "./models/template";
 import lodash from "lodash";
 import { TemplateContext } from "./contexts/template";
+import { LocationValue } from "./types";
 
 import { useState, useEffect } from "react";
 import { useTemplate } from "./hooks/template";
@@ -14,7 +15,7 @@ function TemplateProvider({ children }: ITemplateProvider) {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | undefined>();
   const [targetPhoneNumber, setTargetPhoneNumber] = useState<string>("");
 
-  function updateHeaderUserValue (value: string) {
+  function updateHeaderUserValue (value: string | LocationValue) {
     setSelectedTemplate(
       (template) => {
         const clonnedTemplate = lodash(template).clone();

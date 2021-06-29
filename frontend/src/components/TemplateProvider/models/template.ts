@@ -1,4 +1,5 @@
-import { BodyPayload, HeaderType } from "../types";
+import lodash from "lodash";
+import { BodyPayload, HeaderType, LocationValue } from "../types";
 
 interface Constructor {
   id: string;
@@ -38,15 +39,16 @@ class Template {
         }]
       }
     } else if(this.header.value === "location") {
+      const locationValue = this.header.userValue as LocationValue;
       return {
         type: "header",
         parameters: [{
           type: this.header.value,
           [this.header.value]: {
-            longitude: -122.425332,
-            latitude: 37.758056,
-            name: "Facebook HQ",
-            address: "1 Hacker Way, Menlo Park, CA 94025"
+            longitude: lodash(locationValue.longitude).toNumber(),
+            latitude: lodash(locationValue.latitude).toNumber(),
+            name: locationValue.name,
+            address: locationValue.address
           }
         }]
       }
@@ -70,7 +72,8 @@ class Template {
       }
     )
 
-    return basePayload;
+    if (parameters.length === 1) return null
+    else return basePayload;
   }
 }
 
