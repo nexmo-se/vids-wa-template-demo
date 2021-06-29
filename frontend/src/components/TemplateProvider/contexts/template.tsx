@@ -8,7 +8,8 @@ type TemplateContextType = {
   setSelectedTemplate: React.Dispatch<React.SetStateAction<Template | undefined>>,
   targetPhoneNumber?: string,
   setTargetPhoneNumber: React.Dispatch<React.SetStateAction<string>>,
-  updateHeaderUserValue: (value: (string | LocationValue)) => void;
+  updateHeaderUserValue: (value: (string | LocationValue)) => void,
+  updateBodyUserValue: (index: number, value: string) => void
 }
 
 export const TemplateContext = React.createContext<TemplateContextType>({} as TemplateContextType);

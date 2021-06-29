@@ -6,6 +6,7 @@ interface Constructor {
   namespace: string;
   header?: HeaderType;
   body: string;
+  bodyValues?: string[];
   footer?: string;
 }
 
@@ -14,6 +15,7 @@ class Template {
   namespace: string;
   header?: HeaderType;
   body: string;
+  bodyValues: string[];
   footer?: string;
 
   constructor(args: Constructor) {
@@ -21,6 +23,12 @@ class Template {
     this.namespace = args.namespace;
     this.header = args.header;
     this.body = args.body;
+    
+    // get number of parameters inside the body
+    const countParameters = args.body.split(/{{\d+}}/g).length - 1;
+    if (countParameters === 0) this.bodyValues = [];
+    else this.bodyValues = lodash.times(countParameters, lodash.constant(""));
+    
     this.footer = args.footer;
   }
 
@@ -56,24 +64,24 @@ class Template {
   }
 
   bodyPayload () {
-    const parameters = this.body.split(/{{\d+}}/g);
+    const countParameters = this.body.split(/{{\d+}}/g).length - 1;
+    if (countParameters === 0) return null;
+
     const basePayload: BodyPayload = {
       type: "body",
       parameters: []
     }
 
-    parameters.forEach(
+    lodash(countParameters).times().forEach(
       (_, index) => {
-        if (index === 0) return;
         basePayload.parameters.push({
           type: "text",
-          text: `${index}`
+          text: lodash(this.bodyValues[index]).isEmpty()? "": this.bodyValues[index]
         })
       }
     )
 
-    if (parameters.length === 1) return null
-    else return basePayload;
+    return basePayload;
   }
 }
 

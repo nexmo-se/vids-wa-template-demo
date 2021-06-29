@@ -29,6 +29,17 @@ function TemplateProvider({ children }: ITemplateProvider) {
     )
   }
 
+  function updateBodyUserValue (index: number, value: string) {
+    setSelectedTemplate(
+      (template) => {
+        const clonnedTemplate = lodash(template).clone();
+        
+        clonnedTemplate.bodyValues[index] = value;
+        return clonnedTemplate;
+      }
+    )
+  }
+
   useEffect(
     () => {
       setTemplates([
@@ -104,7 +115,8 @@ function TemplateProvider({ children }: ITemplateProvider) {
         setTargetPhoneNumber,
         selectedTemplate,
         setSelectedTemplate,
-        updateHeaderUserValue
+        updateHeaderUserValue,
+        updateBodyUserValue
       }}
     >
       {children}

@@ -1,14 +1,14 @@
 import lodash from "lodash";
+import { ChangeEvent, createElement } from "react";
 
 import useStyles from "./styles";
 import { useTemplate } from "components/TemplateProvider";
 
 import { Box } from "@material-ui/core";
-import { createElement } from "react";
 
 function BodySection () {
   const mStyles = useStyles();
-  const { selectedTemplate } = useTemplate();
+  const { selectedTemplate, updateBodyUserValue } = useTemplate();
 
   /**
    * Generate body based on the `selectedTemplate.body`. This will convert
@@ -30,9 +30,18 @@ function BodySection () {
           return [span, breakline];
         } else {
           const elements = lodash(splittedInput).slice(0, -1).map(
-            (string) => {
+            (string, index) => {
               const span = createElement("span", null, string);
-              const input = createElement("input", { type: "text", size: 20 });
+              const input = createElement(
+                "input",
+                {
+                  type: "text",
+                  size: 20,
+                  value: selectedTemplate.bodyValues[index],
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => updateBodyUserValue(index, e.target.value)
+                }
+              );
+
               const inputContainer = createElement("div", { className: "Vlt-input" }, input);
               return [span, inputContainer]
             }
