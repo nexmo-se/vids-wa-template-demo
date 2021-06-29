@@ -3,5 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Frans Huang <franssiswanto@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build:backend": "cd backend && yarn build",
+    "build:frontend": "cd frontend && yarn build",
+    "copyfiles": "cd frontend && cp -R ./build ../backend/public",
+    "build": "yarn build:backend && yarn build:frontend && yarn copyfiles",
+    "start": "cd backend && yarn start:prod"
+  }
 }
