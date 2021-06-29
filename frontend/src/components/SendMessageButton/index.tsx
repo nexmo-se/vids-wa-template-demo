@@ -23,10 +23,6 @@ function SendMessageButton() {
     
       const url = `${Config.apiUrl}/whatsapp-templates`;
       const body = {
-        from: {
-          type: "whatsapp",
-          number: "447418342132"
-        },
         to: {
           type: "whatsapp",
           number: targetPhoneNumber
