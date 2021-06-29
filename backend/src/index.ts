@@ -15,6 +15,8 @@ import WATemplateRoutes from "./routes/wa-template";
 
   app.use("/whatsapp-templates", WATemplateRoutes);
   app.post("/status", (req: any, res: any) => res.status(200).end());
+
+  app.use(express.static("public"));
   
   app.listen(config.port, () => {
     console.log(`Express is listening on port: ${config.port}`)
