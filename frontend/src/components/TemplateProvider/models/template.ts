@@ -1,16 +1,6 @@
-import { HeaderType } from "../types";
+import { BodyPayload, HeaderType } from "../types";
 
-type Paramater = {
-  type: string;
-  text: string;
-}
-
-interface BodyPayload {
-  type: "body",
-  parameters: Paramater[]
-}
-
-interface ITemplate {
+interface Constructor {
   id: string;
   namespace: string;
   header?: HeaderType;
@@ -18,14 +8,14 @@ interface ITemplate {
   footer?: string;
 }
 
-class Template implements ITemplate {
+class Template {
   id: string;
   namespace: string;
   header?: HeaderType;
   body: string;
   footer?: string;
 
-  constructor(args: ITemplate) {
+  constructor(args: Constructor) {
     this.id = args.id;
     this.namespace = args.namespace;
     this.header = args.header;
@@ -43,7 +33,7 @@ class Template implements ITemplate {
         parameters: [{
           type: this.header.value,
           [this.header.value]: {
-            link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+            link: this.header.userValue ?? "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
           }
         }]
       }

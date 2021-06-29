@@ -9,6 +9,7 @@ function SendMessageButton() {
   const { selectedTemplate, targetPhoneNumber } = useTemplate();
 
   async function handleSendMessageClick() {
+    console.log(selectedTemplate);
     try {
       setSending(true);
 
@@ -21,7 +22,7 @@ function SendMessageButton() {
       ]).compact().value();
     
       const url = `${Config.apiUrl}/whatsapp-templates`;
-      const body = JSON.stringify({
+      const body = {
         from: {
           type: "whatsapp",
           number: "447418342132"
@@ -45,12 +46,14 @@ function SendMessageButton() {
             }
           }
         }
-      })
+      }
+
+      console.log(JSON.stringify(body, null, 2))
 
       await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body
+        body: JSON.stringify(body)
       });
     } catch (err) {
       console.error(err);

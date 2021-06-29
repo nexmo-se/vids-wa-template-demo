@@ -5,24 +5,27 @@ import TextField from "components/TextField";
 import { Box } from "@material-ui/core";
 
 function HeaderSection () {
+  const { selectedTemplate, updateHeaderUserValue } = useTemplate();
   const mStyles = useStyles();
-  const { selectedTemplate } = useTemplate();
 
   function generateInput (type: string) {
+    if (!selectedTemplate) return null;
+    if (!selectedTemplate.header) return null;
+
     if (type === "text") {
       return (
         <TextField
           label="Text"
-          value=""
-          setValue={() => {}}
+          value={selectedTemplate.header.userValue ?? ""}
+          setValue={updateHeaderUserValue}
         />
       )
-    } else if (["document", "image", "video"]) {
+    } else if (["document", "image", "video"].includes(type)) {
       return (
         <TextField
           label="URL"
-          value=""
-          setValue={() => {}}
+          value={selectedTemplate.header.userValue ?? ""}
+          setValue={updateHeaderUserValue}
         />
       )
     } else if (type === "location") {
@@ -31,24 +34,24 @@ function HeaderSection () {
           <div className={mStyles.locationContainer}>
             <TextField
               label="Longitude"
-              value=""
-              setValue={() => {}}
+              value={selectedTemplate.header.userValue ?? ""}
+              setValue={updateHeaderUserValue}
             />
             <TextField
               label="Latitude"
-              value=""
-              setValue={() => {}}
+              value={selectedTemplate.header.userValue ?? ""}
+              setValue={updateHeaderUserValue}
             />
           </div>
           <TextField
             label="Name"
-            value=""
-            setValue={() => {}}
+            value={selectedTemplate.header.userValue ?? ""}
+            setValue={updateHeaderUserValue}
           />
           <TextField
             label="Address"
-            value=""
-            setValue={() => {}}
+            value={selectedTemplate.header.userValue ?? ""}
+            setValue={updateHeaderUserValue}
           />
         </>
       )
@@ -69,7 +72,7 @@ function HeaderSection () {
         </Box>
         <Box className="Vlt-card__content">
           <div>
-            <p>Media Type: <b>{selectedTemplate.header.type}</b></p>
+            <p>Media Type: <b>{selectedTemplate.header.value}</b></p>
           </div>
           <div>
             {generateInput(selectedTemplate.header.value)}

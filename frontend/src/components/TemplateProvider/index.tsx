@@ -1,4 +1,5 @@
 import Template from "./models/template";
+import lodash from "lodash";
 import { TemplateContext } from "./contexts/template";
 
 import { useState, useEffect } from "react";
@@ -12,6 +13,20 @@ function TemplateProvider({ children }: ITemplateProvider) {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | undefined>();
   const [targetPhoneNumber, setTargetPhoneNumber] = useState<string>("");
+
+  function updateHeaderUserValue (value: string) {
+    setSelectedTemplate(
+      (template) => {
+        const clonnedTemplate = lodash(template).clone();
+
+        if (!clonnedTemplate) return template;
+        if (!clonnedTemplate.header) return template;
+
+        clonnedTemplate.header.userValue = value;
+        return clonnedTemplate;
+      }
+    )
+  }
 
   useEffect(
     () => {
@@ -87,7 +102,8 @@ function TemplateProvider({ children }: ITemplateProvider) {
         targetPhoneNumber,
         setTargetPhoneNumber,
         selectedTemplate,
-        setSelectedTemplate
+        setSelectedTemplate,
+        updateHeaderUserValue
       }}
     >
       {children}

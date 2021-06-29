@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 interface TextFieldProps {
   label?: string;
   value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  setValue: (Dispatch<SetStateAction<string>>) | ((value: string) => void);
   hint?: string;
   InputProps?: Record<string, any>
 }

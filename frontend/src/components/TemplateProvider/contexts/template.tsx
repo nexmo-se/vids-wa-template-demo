@@ -6,7 +6,8 @@ type TemplateContextType = {
   selectedTemplate?: Template,
   setSelectedTemplate: React.Dispatch<React.SetStateAction<Template | undefined>>,
   targetPhoneNumber?: string,
-  setTargetPhoneNumber: React.Dispatch<React.SetStateAction<string>>
+  setTargetPhoneNumber: React.Dispatch<React.SetStateAction<string>>,
+  updateHeaderUserValue: (value: string) => void;
 }
 
-export const TemplateContext = React.createContext<Partial<TemplateContextType>>({});
+export const TemplateContext = React.createContext<TemplateContextType>({} as TemplateContextType);
