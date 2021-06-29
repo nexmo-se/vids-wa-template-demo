@@ -16,7 +16,7 @@ class Vids {
   async getNexmo (token: string) {
     if (!this.instance) throw new Error("Not initialised");
 
-    const id = this.getIdFromJwt(token);
+    const id = this.getIdFromJWT(token);
     return this.instance.getNexmo(id);
   }
 
@@ -25,10 +25,10 @@ class Vids {
     return this.instance.getBearerToken(req);
   }
 
-  getIdFromJwt (token: string) {
+  getIdFromJWT (token: string) {
     if (!this.instance) throw new Error("Not initialised");
     if (!this.config) throw new Error("Not initialised");
-    return this.instance.getIdFromJwt(this.config, token);
+    return this.instance.getIdFromJWT(this.config, token);
   }
 }
 
