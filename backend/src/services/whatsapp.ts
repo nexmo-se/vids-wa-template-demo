@@ -1,7 +1,9 @@
 import NexmoConfig from "../configs/nexmo";
+import Message from "../models/message";
+
 import FetchService from "./fetch";
 import NexmoService from "./nexmo";
-import Message from "../models/message";
+import VidsService from "./vids";
 
 interface ISendMessage {
   message: Message;
@@ -9,9 +11,13 @@ interface ISendMessage {
 
 class WAService {
   static async sendMessage({ message }: ISendMessage) {
-    const jwt = NexmoService.instance.generateJwt();
-    const url = `${NexmoConfig.apiURL}/messages`;
-    
+    const vonage = await NexmoService.getInstance("master");
+
+    // @ts-ignore
+    // Ignored because the `generateJwt()` is not exported or not available in
+    // typings document. This need to be improvied.
+    const jwt = vonage.generateJwt();
+    const url = `${NexmoConfig.apiUrl}/v0.1/messages`;
     const body = {
       from: {
         type: message.from.type,
@@ -22,7 +28,7 @@ class WAService {
         content: message.content
       }
     }
-    
+
     const response = await FetchService.fetch(url, {
       method: "POST",
       headers: {
@@ -32,8 +38,7 @@ class WAService {
       body: JSON.stringify(body)
     });
 
-    const jsonResponse = JSON.parse(response);
-    return jsonResponse;
+    return response;
   }
 }
 export default WAService

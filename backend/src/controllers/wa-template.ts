@@ -14,12 +14,11 @@ class WATemplateController {
     const vids = await VidsService.getInstance();
     const jwt = vids.getBearerToken(req);
     const userInformation = await vids.getNexmo(jwt);
-    console.log(userInformation);
 
     const message = new Message({
       from: {
         type: "whatsapp",
-        number: NexmoConfig.waNumber
+        number: userInformation.wanumber // uses WhatsApp number returned from VIDS
       },
       to,
       content

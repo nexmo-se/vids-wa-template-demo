@@ -4,6 +4,7 @@ import { Request } from "express";
 class Vids {
   instance: any;
   config: any;
+  token: string;
 
   constructor () {}
 
@@ -14,10 +15,13 @@ class Vids {
     await this.instance.getDb(this.config);
   }
 
-  async getNexmo (token: string) {
+  async getNexmo (token: string): Promise<any>;
+  async getNexmo (): Promise<any>;
+  async getNexmo (...args: any) {
     if (!this.instance) throw new Error("Not initialised");
-
-    const id = this.getIdFromJWT(token);
+    if (args.token) this.token = args.token;
+    
+    const id = this.getIdFromJWT(this.token);
     return this.instance.getNexmo(id);
   }
 
