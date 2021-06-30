@@ -1,4 +1,6 @@
+import Config from "configs";
 import { makeStyles } from "@material-ui/core";
+
 export default makeStyles((theme) => ({
   previewContainer: {
     padding: theme.spacing(2),
@@ -10,7 +12,7 @@ export default makeStyles((theme) => ({
     borderRadius: 8,
 
     "&::before": {
-      background: "url(/assets/img/preview-background.png)",
+      background: `url(${Config.publicUrl}/assets/img/preview-background.png)`,
       backgroundSize: "366.5px 666px",
       content: "' '",
       height: "100%",
@@ -36,7 +38,7 @@ export default makeStyles((theme) => ({
     position: "relative",
 
     "&::after": {
-      background: "url(/assets/img/chat-arrow.png)",
+      background: `url(${Config.publicUrl}/assets/img/chat-arrow.png)`,
       backgroundSize: "contain",
       content: "' '",
       height: 19,
@@ -72,7 +74,7 @@ export default makeStyles((theme) => ({
     padding: "3px 3px 0px 3px",
   },
   media: {
-    backgroundImage: "url(/assets/img/media-document.png)",
+    backgroundImage: `url(${Config.publicUrl}/assets/img/media-document.png)`,
     backgroundColor: "#ccd0d5",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",

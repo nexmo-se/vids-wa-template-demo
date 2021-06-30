@@ -1,10 +1,12 @@
+import Config from "configs";
 import { makeStyles } from "@material-ui/core";
-export default makeStyles((theme) => ({
+
+export default makeStyles(() => ({
   mediaContainer: {
     padding: "3px 3px 0px 3px",
   },
   media: (props: any) => ({
-    backgroundImage: `url(/assets/img/media-${props.mediaType}.png)`,
+    backgroundImage: `url(${Config.publicUrl}/assets/img/media-${props.mediaType}.png)`,
     backgroundColor: "#ccd0d5",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",

@@ -1,3 +1,4 @@
+import Config from "configs";
 import { makeStyles } from "@material-ui/core";
 
 export default makeStyles(
@@ -9,7 +10,7 @@ export default makeStyles(
       borderRadius: 8,
       position: "relative",
       "&::before": {
-        background: "url(/assets/img/preview-background.png)",
+        background: `url(${Config.publicUrl}/assets/img/preview-background.png)`,
         backgroundSize: "366.5px 666px",
         content: "' '",
         height: "100%",
