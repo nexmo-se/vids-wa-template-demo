@@ -8,10 +8,6 @@ module.exports = {
     return sample;
   },
   getIdFromJWT: (token) => {},
-  getBearerToken: (req) => {
-    const token = req.header("Authorization").replace("Bearer", "").trim();
-    return token;
-  },
   getIniStuff: () => {
     return sample;
   }

@@ -27,7 +27,8 @@ class Vids {
 
   getBearerToken (req: Request) {
     if (!this.instance) throw new Error("Not initialised");
-    return this.instance.getBearerToken(req);
+    const token = req.headers.authorization.replace("Bearer", "").trim();
+    return token;
   }
 
   getIdFromJWT (token: string) {
