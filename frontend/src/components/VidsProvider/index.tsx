@@ -65,7 +65,7 @@ function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
 
       fetchData();
     },
-    [token]
+    [token, sendRequest]
   )
 
   if (!token || !userInformation) return null;
