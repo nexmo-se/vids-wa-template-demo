@@ -22,23 +22,25 @@ function BodySection () {
     const splittedString = selectedTemplate.body.split(/\n/g);
     const elements = lodash(splittedString)
     .map(
-      (string, mainIndex) => {
+      (mainString, mainIndex) => {
         const breakline = createElement("br", { key: `${selectedTemplate.id}_body_br_${mainIndex}` });
-        const splittedInput = string.split(/{{\d+}}/g);
+        const splittedInput = mainString.split(/{{\d+}}/g);
         if (splittedInput.length === 1) {
-          const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_1` }, string);
+          const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_1` }, mainString);
           return [span, breakline];
         } else {
+          const parameters = mainString.match(/{{\d+}}/g) ?? [];
           const elements = lodash(splittedInput).slice(0, -1).map(
-            (string, childIndex) => {
-              const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_${childIndex}` } , string);
+            (childString, childIndex) => {
+              const bodyIndex = parseInt(parameters[childIndex].replace("{{", "").replace("}}","")) - 1;
+              const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_${childIndex}` } , childString);
               const input = createElement(
                 "input",
                 {
                   type: "text",
                   size: 20,
-                  value: selectedTemplate.bodyValues[childIndex],
-                  onChange: (e: ChangeEvent<HTMLInputElement>) => updateBodyUserValue(childIndex, e.target.value)
+                  value: selectedTemplate.bodyValues[bodyIndex],
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => updateBodyUserValue(bodyIndex, e.target.value)
                 }
               );
 
@@ -50,6 +52,7 @@ function BodySection () {
                 },
                 input
               );
+
               return [span, inputContainer]
             }
           ).value()
