@@ -10,6 +10,7 @@ class Vids {
   async init () {
     this.instance = await import(VidsConfig.utilsPath);
     this.config = await this.instance.getIniStuff();
+
     await this.instance.getDb(this.config);
   }
 
