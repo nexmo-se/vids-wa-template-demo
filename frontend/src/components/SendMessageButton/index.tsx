@@ -11,7 +11,6 @@ function SendMessageButton() {
   const { sendRequest } = useVids();
 
   async function handleSendMessageClick() {
-    console.log(selectedTemplate);
     try {
       setSending(true);
 
@@ -45,8 +44,6 @@ function SendMessageButton() {
           }
         }
       }
-
-      console.log(JSON.stringify(body, null, 2))
 
       await sendRequest(url, {
         method: "POST",
