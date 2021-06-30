@@ -22,16 +22,16 @@ function BodySection () {
     const splittedString = selectedTemplate.body.split(/\n/g);
     const elements = lodash(splittedString)
     .map(
-      (string) => {
-        const breakline = createElement("br");
+      (string, index) => {
+        const breakline = createElement("br", { key: `body_br_${index}` });
         const splittedInput = string.split(/{{\d+}}/g);
         if (splittedInput.length === 1) {
-          const span = createElement("span", null, string);
+          const span = createElement("span", { key: `body_span_1` }, string);
           return [span, breakline];
         } else {
           const elements = lodash(splittedInput).slice(0, -1).map(
             (string, index) => {
-              const span = createElement("span", null, string);
+              const span = createElement("span", { key: `body_span_${index}` } , string);
               const input = createElement(
                 "input",
                 {
@@ -42,7 +42,14 @@ function BodySection () {
                 }
               );
 
-              const inputContainer = createElement("div", { className: "Vlt-input" }, input);
+              const inputContainer = createElement(
+                "div",
+                {
+                  className: "Vlt-input",
+                  key: `body_input_${index}`
+                },
+                input
+              );
               return [span, inputContainer]
             }
           ).value()
