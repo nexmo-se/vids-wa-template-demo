@@ -19,7 +19,7 @@ class Vids {
   async getNexmo (): Promise<any>;
   async getNexmo (...args: any) {
     if (!this.instance) throw new Error("Not initialised");
-    if (args.token) this.token = args.token;
+    if (args[0]) this.token = args[0];
     
     const id = this.getIdFromJWT(this.token);
     return this.instance.getNexmo(id);
