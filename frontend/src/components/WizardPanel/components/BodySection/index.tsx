@@ -58,7 +58,6 @@ function BodySection () {
       }
     ).flattenDeep().value();
 
-    console.log(elements);
     return elements;
   }
 

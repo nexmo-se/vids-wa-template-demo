@@ -5,7 +5,7 @@ import PhoneInput from "react-phone-input-2";
 import { Box } from "@material-ui/core";
 
 function SendToSection() {
-  const { setTargetPhoneNumber } = useTemplate();
+  const { targetPhoneNumber, setTargetPhoneNumber } = useTemplate();
 
   function handleChange(phone: string) {
     if (!setTargetPhoneNumber) return;
@@ -28,6 +28,7 @@ function SendToSection() {
           country="sg"
           preferredCountries={["sg", "id", "my", "fr", "uk", "ph", "us", "cn", "ca"]}
           onChange={handleChange}
+          value={targetPhoneNumber}
         />
       </Box>
     </Box>

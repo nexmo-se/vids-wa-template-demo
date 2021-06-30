@@ -3,6 +3,7 @@ import lodash from "lodash";
 import { TemplateContext } from "./contexts/template";
 import { LocationValue } from "./types";
 
+import { useVids } from "components/VidsProvider";
 import { useState, useEffect } from "react";
 import { useTemplate } from "./hooks/template";
 
@@ -11,9 +12,11 @@ interface ITemplateProvider {
 }
 
 function TemplateProvider({ children }: ITemplateProvider) {
+  const { userInformation } = useVids();
+
   const [templates, setTemplates] = useState<Template[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | undefined>();
-  const [targetPhoneNumber, setTargetPhoneNumber] = useState<string>("");
+  const [targetPhoneNumber, setTargetPhoneNumber] = useState<string>(userInformation.phone);
 
   function updateHeaderUserValue (value: string | LocationValue) {
     setSelectedTemplate(

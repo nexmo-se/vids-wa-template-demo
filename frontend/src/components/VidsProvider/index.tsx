@@ -1,8 +1,10 @@
+import Config from "configs";
+import UserInformation from "./models/user-information";
 import lodash from "lodash";
 import { VidsContext } from "./contexts/vids";
 
 import { useVids } from "./hooks/vids";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface VidsProviderProps {
   children: any;
@@ -17,6 +19,7 @@ interface VidsProviderProps {
  */
 function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
   const [token, setToken] = useState<string>();
+  const [userInformation, setUserInformation] = useState<UserInformation>();
 
   /**
    * Add additional Authorization headers to endpoint. This assume we uses
@@ -27,13 +30,16 @@ function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
    * @param init 
    * @returns 
    */
-  async function sendRequest (input: RequestInfo, init?: RequestInit) {
-    if (!token) return Promise.reject();
+  const sendRequest = useCallback(
+    (input: RequestInfo, init?: RequestInit) => {
+      if (!token) return Promise.reject();
 
-    const additionalHeader = { Authorization: `Bearer ${token}` };
-    const combinedInit = lodash(init).merge({ headers: additionalHeader }).value();
-    return fetch(input, combinedInit);
-  }
+      const additionalHeader = { Authorization: `Bearer ${token}` };
+      const combinedInit = lodash(init).merge({ headers: additionalHeader }).value();
+      return fetch(input, combinedInit);
+    },
+    [token]
+  )
 
   useEffect(
     () => {
@@ -43,14 +49,32 @@ function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
       else setToken(undefined);
     },
     [tokenParam]
+  );
+
+  useEffect(
+    () => {
+      // Fetch user information from VIDS backend
+      async function fetchData () {
+        const response = await sendRequest(`${Config.apiUrl}/vids`, { method: "GET" });
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          const userInformation = UserInformation.fromResponse(jsonResponse);
+          setUserInformation(userInformation);
+        }
+      }
+
+      fetchData();
+    },
+    [token]
   )
 
-  if (!token) return null;
+  if (!token || !userInformation) return null;
   else {
     return (
       <VidsContext.Provider
         value={{
           token,
+          userInformation,
           sendRequest
         }}
       >

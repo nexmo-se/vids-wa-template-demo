@@ -50,7 +50,6 @@ class FetchService{
       Accept: "application/json",
       Authorization: accessToken? `Bearer ${accessToken}`: undefined
     }));
-    console.log(headers)
 
     const options = { method: "POST", headers, body }
     return FetchService.fetch(url, options);

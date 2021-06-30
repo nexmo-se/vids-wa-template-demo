@@ -1,7 +1,9 @@
+import UserInformation from "../models/user-information";
 import { createContext } from "react";
 
 interface VidsContextProps {
   token: string;
+  userInformation: UserInformation;
   sendRequest: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 }
 

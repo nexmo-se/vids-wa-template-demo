@@ -1,5 +1,4 @@
 import Message from "../models/message";
-import NexmoConfig from "../configs/nexmo";
 import { Request, Response } from "express";
 
 import WAService from "../services/whatsapp";
