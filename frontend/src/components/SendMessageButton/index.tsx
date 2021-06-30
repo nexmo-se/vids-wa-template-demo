@@ -2,11 +2,13 @@ import Config from "configs";
 import lodash from "lodash";
 
 import { useState } from "react";
+import { useVids } from "components/VidsProvider";
 import { useTemplate } from "components/TemplateProvider";
 
 function SendMessageButton() {
   const [sending, setSending] = useState<boolean>(false);
   const { selectedTemplate, targetPhoneNumber } = useTemplate();
+  const { sendRequest } = useVids();
 
   async function handleSendMessageClick() {
     console.log(selectedTemplate);
@@ -46,7 +48,7 @@ function SendMessageButton() {
 
       console.log(JSON.stringify(body, null, 2))
 
-      await fetch(url, {
+      await sendRequest(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

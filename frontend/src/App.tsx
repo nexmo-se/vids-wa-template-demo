@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
 import TemplateProvider from "components/TemplateProvider";
+import VidsProvider from "components/VidsProvider";
 import Container from "components/Container";
 import PreviewBubble from "components/PreviewBubble";
 import WizardPanel from "components/WizardPanel";
@@ -19,24 +20,26 @@ function App() {
   const mStyles = useStyles();
 
   return (
-    <TemplateProvider>
-      <Container>
-        <Box className={mStyles.header}>
-          <h2>
-            WhatsApp Media Template Demo
-          </h2>
-          <SendMessageButton />
-        </Box>
-        <Grid container>
-          <Grid xs={8} item>
-            <WizardPanel />
+    <VidsProvider>
+      <TemplateProvider>
+        <Container>
+          <Box className={mStyles.header}>
+            <h2>
+              WhatsApp Media Template Demo
+            </h2>
+            <SendMessageButton />
+          </Box>
+          <Grid container>
+            <Grid xs={8} item>
+              <WizardPanel />
+            </Grid>
+            <Grid xs={4} item>
+              <PreviewBubble />
+            </Grid>
           </Grid>
-          <Grid xs={4} item>
-            <PreviewBubble />
-          </Grid>
-        </Grid>
-      </Container>
-    </TemplateProvider>
+        </Container>
+      </TemplateProvider>
+    </VidsProvider>
   )
 }
 
