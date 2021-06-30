@@ -1,12 +1,14 @@
 import Config from "configs";
 import lodash from "lodash";
+import validator from "validator";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useVids } from "components/VidsProvider";
 import { useTemplate } from "components/TemplateProvider";
 
 function SendMessageButton() {
   const [sending, setSending] = useState<boolean>(false);
+  const [isClean, setIsClean] = useState<boolean>(false);
   const { selectedTemplate, targetPhoneNumber } = useTemplate();
   const { sendRequest } = useVids();
 
@@ -57,11 +59,22 @@ function SendMessageButton() {
     }
   }
 
+  useEffect(
+    () => {
+      setIsClean(
+        selectedTemplate !== undefined &&
+        targetPhoneNumber !== undefined &&
+        validator.isMobilePhone(targetPhoneNumber)
+      )
+    },
+    [selectedTemplate, targetPhoneNumber]
+  )
+
   return (
     <button
       className="Vlt-btn Vlt-btn--primary Vlt-btn--app"
       onClick={handleSendMessageClick}
-      disabled={sending}
+      disabled={sending || !isClean}
     >
       Send Templated Message
     </button>
