@@ -22,23 +22,23 @@ function BodySection () {
     const splittedString = selectedTemplate.body.split(/\n/g);
     const elements = lodash(splittedString)
     .map(
-      (string, index) => {
-        const breakline = createElement("br", { key: `body_br_${index}` });
+      (string, mainIndex) => {
+        const breakline = createElement("br", { key: `${selectedTemplate.id}_body_br_${mainIndex}` });
         const splittedInput = string.split(/{{\d+}}/g);
         if (splittedInput.length === 1) {
-          const span = createElement("span", { key: `body_span_1` }, string);
+          const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_1` }, string);
           return [span, breakline];
         } else {
           const elements = lodash(splittedInput).slice(0, -1).map(
-            (string, index) => {
-              const span = createElement("span", { key: `body_span_${index}` } , string);
+            (string, childIndex) => {
+              const span = createElement("span", { key: `${selectedTemplate.id}_body_span_${mainIndex}_${childIndex}` } , string);
               const input = createElement(
                 "input",
                 {
                   type: "text",
                   size: 20,
-                  value: selectedTemplate.bodyValues[index],
-                  onChange: (e: ChangeEvent<HTMLInputElement>) => updateBodyUserValue(index, e.target.value)
+                  value: selectedTemplate.bodyValues[childIndex],
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => updateBodyUserValue(childIndex, e.target.value)
                 }
               );
 
@@ -46,7 +46,7 @@ function BodySection () {
                 "div",
                 {
                   className: "Vlt-input",
-                  key: `body_input_${index}`
+                  key: `${selectedTemplate.id}_body_input_${mainIndex}_${childIndex}`
                 },
                 input
               );
@@ -56,7 +56,9 @@ function BodySection () {
           return [elements, breakline]
         }
       }
-    ).flattenDeep().value()
+    ).flattenDeep().value();
+
+    console.log(elements);
     return elements;
   }
 
