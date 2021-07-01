@@ -61,11 +61,25 @@ function SendMessageButton() {
 
   useEffect(
     () => {
-      setIsClean(
-        selectedTemplate !== undefined &&
-        targetPhoneNumber !== undefined &&
-        validator.isMobilePhone(targetPhoneNumber)
-      )
+      if (!selectedTemplate) {
+        setIsClean(false);
+        return;
+      }
+
+      const countParameters = selectedTemplate.body.split(/{{\d+}}/g).length - 1;
+      if (countParameters === 0) {
+        setIsClean(
+          targetPhoneNumber !== undefined &&
+          validator.isMobilePhone(targetPhoneNumber)
+        ) 
+      } else {
+        const paramatersHasValue = !(lodash(lodash(countParameters).times()).map(
+          (_, index) => {
+            return { isEmpty: lodash(selectedTemplate.bodyValues[index]).isEmpty() }
+          }
+        ).find({ isEmpty: true }))
+        setIsClean(paramatersHasValue)
+      }
     },
     [selectedTemplate, targetPhoneNumber]
   )
