@@ -1,14 +1,29 @@
+export type MediaType = "text" | "media" | "document" | "video" | "image" | "location";
+export type HeaderUserValue = TextValue | MediaValue | LocationValue | DocumentValue;
+export type TextValue = {
+  text: string;
+}
+
+export type MediaValue = {
+  link: string;
+}
+
 export type LocationValue = {
-  longitude: number;
-  latitude: number;
-  name?: string;
-  address?: string;
+  longitude: string;
+  latitude: string;
+  name: string;
+  address: string;
+}
+
+export type DocumentValue = {
+  link: string;
+  filename: string;
 }
 
 export type HeaderType = {
   type: "text" | "media",
-  value: string;
-  userValue?: string | LocationValue;
+  value: MediaType,
+  userValue: HeaderUserValue // always have, because it has default value
 }
 
 export type Paramater = {

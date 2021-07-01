@@ -1,5 +1,5 @@
 import lodash from "lodash";
-import { LocationValue } from "components/TemplateProvider/types";
+import { DocumentValue, HeaderUserValue, LocationValue, MediaValue, TextValue } from "components/TemplateProvider/types";
 
 import useStyles from "./styles";
 import { useTemplate } from "components/TemplateProvider";
@@ -11,11 +11,11 @@ function HeaderSection () {
   const { selectedTemplate, updateHeaderUserValue } = useTemplate();
   const mStyles = useStyles();
 
-  function handleLocationChange (key: string, value: string) {
+  function handleHeaderValueChange (key: string, value: string | number) {
     if (!selectedTemplate) return;
     if (!selectedTemplate.header) return;
 
-    const clonnedValue = lodash(selectedTemplate.header.userValue as LocationValue).clone() ?? {}
+    const clonnedValue = lodash(selectedTemplate.header.userValue as HeaderUserValue).clone() ?? {}
     const modifiedValue = lodash(clonnedValue).set(key, value).value()
     updateHeaderUserValue(modifiedValue);
   }
@@ -28,17 +28,32 @@ function HeaderSection () {
       return (
         <TextField
           label="Text"
-          value={(selectedTemplate.header.userValue as string) ?? ""}
-          setValue={updateHeaderUserValue}
+          value={(selectedTemplate.header.userValue as TextValue).text}
+          setValue={(value: string) => handleHeaderValueChange("text", value)}
         />
       )
-    } else if (["document", "image", "video"].includes(type)) {
+    } else if (["image", "video"].includes(type)) {
       return (
         <TextField
-          label="URL"
-          value={(selectedTemplate.header.userValue as string) ?? ""}
-          setValue={updateHeaderUserValue}
+          label="Link"
+          value={(selectedTemplate.header.userValue as MediaValue).link}
+          setValue={(value: string) => handleHeaderValueChange("link", value)}
         />
+      )
+    } else if (type === "document") {
+      return (
+        <div className={mStyles.documentContainer}>
+          <TextField
+            label="URL"
+            value={(selectedTemplate.header.userValue as DocumentValue).link}
+            setValue={(value: string) => handleHeaderValueChange("link", value)}
+          />
+          <TextField
+            label="File Name"
+            value={(selectedTemplate.header.userValue as DocumentValue).filename}
+            setValue={(value: string) => handleHeaderValueChange("filename", value)}
+          />
+        </div>
       )
     } else if (type === "location") {
       return (
@@ -46,24 +61,24 @@ function HeaderSection () {
           <div className={mStyles.locationContainer}>
             <TextField
               label="Longitude"
-              value={(selectedTemplate.header.userValue as LocationValue)?.longitude ?? ""}
-              setValue={(value: string) => handleLocationChange("longitude", value)}
+              value={(selectedTemplate.header.userValue as LocationValue).longitude}
+              setValue={(value: string) => handleHeaderValueChange("longitude", value)}
             />
             <TextField
               label="Latitude"
-              value={(selectedTemplate.header.userValue as LocationValue)?.latitude ?? ""}
-              setValue={(value: string) => handleLocationChange("latitude", value)}
+              value={(selectedTemplate.header.userValue as LocationValue).latitude}
+              setValue={(value: string) => handleHeaderValueChange("latitude", value)}
             />
           </div>
           <TextField
             label="Name"
-            value={(selectedTemplate.header.userValue as LocationValue)?.name ?? ""}
-            setValue={(value: string) => handleLocationChange("name", value)}
+            value={(selectedTemplate.header.userValue as LocationValue).name}
+            setValue={(value: string) => handleHeaderValueChange("name", value)}
           />
           <TextField
             label="Address"
-            value={(selectedTemplate.header.userValue as LocationValue)?.address ?? ""}
-            setValue={(value: string) => handleLocationChange("address", value)}
+            value={(selectedTemplate.header.userValue as LocationValue).address}
+            setValue={(value: string) => handleHeaderValueChange("address", value)}
           />
         </>
       )

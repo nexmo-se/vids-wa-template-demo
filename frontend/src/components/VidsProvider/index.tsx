@@ -32,7 +32,7 @@ function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
    */
   const sendRequest = useCallback(
     (input: RequestInfo, init?: RequestInit) => {
-      if (!token) return Promise.reject();
+      if (!token) return Promise.reject("No token found");
 
       const additionalHeader = { Authorization: `Bearer ${token}` };
       const combinedInit = lodash(init).merge({ headers: additionalHeader }).value();
@@ -62,8 +62,7 @@ function VidsProvider ({ children, tokenParam }: VidsProviderProps) {
           setUserInformation(userInformation);
         }
       }
-
-      fetchData();
+      if (token) fetchData();
     },
     [token, sendRequest]
   )

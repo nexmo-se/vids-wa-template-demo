@@ -1,7 +1,7 @@
 import Template from "./models/template";
 import lodash from "lodash";
 import { TemplateContext } from "./contexts/template";
-import { LocationValue } from "./types";
+import { HeaderUserValue } from "./types";
 
 import { useVids } from "components/VidsProvider";
 import { useState, useEffect } from "react";
@@ -18,7 +18,7 @@ function TemplateProvider({ children }: ITemplateProvider) {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | undefined>();
   const [targetPhoneNumber, setTargetPhoneNumber] = useState<string>(userInformation.phone);
 
-  function updateHeaderUserValue (value: string | LocationValue) {
+  function updateHeaderUserValue (value: HeaderUserValue) {
     setSelectedTemplate(
       (template) => {
         const clonnedTemplate = lodash(template).clone();
@@ -51,7 +51,11 @@ function TemplateProvider({ children }: ITemplateProvider) {
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {
             type: "media",
-            value: "document"
+            value: "document",
+            userValue: {
+              link: "https://www.vonage.com/content/dam/vonage/us-en/resources/pdfs/Going_for_CX_Gold_Healthcare.pdf",
+              filename: "Ticket.pdf"
+            }
           },
           body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}."
         }),
@@ -60,7 +64,13 @@ function TemplateProvider({ children }: ITemplateProvider) {
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {
             type: "media",
-            value: "location"
+            value: "location",
+            userValue: {
+              longitude: "-122.425332",
+              latitude: "37.758056",
+              name: "Vonage Singapore",
+              address: "5 Temasek Boulevard, Tower 5, #17-01, 038985"
+            }
           },
           body: "Your nearest airport is here."
         }),
@@ -69,7 +79,10 @@ function TemplateProvider({ children }: ITemplateProvider) {
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {
             type: "media",
-            value: "image"
+            value: "image",
+            userValue: {
+              link: "https://media.trustradius.com/product-logos/L4/SU/HIH3BT8SDLDB.JPEG"
+            }
           },
           body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}."
         }),
@@ -78,7 +91,11 @@ function TemplateProvider({ children }: ITemplateProvider) {
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {
             type: "media",
-            value: "document"
+            value: "document",
+            userValue: {
+              link: "https://www.vonage.com/content/dam/vonage/us-en/resources/pdfs/Going_for_CX_Gold_Healthcare.pdf",
+              filename: "Ticket.pdf"
+            }
           },
           body: "Hi,here is your boarding pass. Thank you."
         }),
@@ -87,7 +104,10 @@ function TemplateProvider({ children }: ITemplateProvider) {
           namespace: "whatsapp:hsm:technology:nexmo",
           header: {
             type: "media",
-            value: "video"
+            value: "video",
+            userValue: {
+              link: "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
+            }
           },
           body: "Hi {{1}}, Here is your Boarding Pass for your flight {{2}} from {{3}} to {{4}}."
         }),
@@ -128,4 +148,5 @@ function TemplateProvider({ children }: ITemplateProvider) {
 }
 
 export { useTemplate }
+export type { HeaderUserValue }
 export default TemplateProvider;
