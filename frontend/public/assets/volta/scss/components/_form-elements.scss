@@ -1,0 +1,875 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+%select-arrow {
+	$fill-color: encode-hex-code($black);
+	background-image: url('data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20viewBox%3D%220%200%2020%2020%22%20style%3D%22enable-background%3Anew%200%200%2020%2020%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M7%2C7.8C6.7%2C7.5%2C6.2%2C7.6%2C5.9%2C7.9S5.7%2C8.7%2C6%2C9l4%2C3.4l4-3.4c0.3-0.3%2C0.3-0.8%2C0-1.1%0D%0A%09c-0.3-0.3-0.7-0.3-1-0.1l-3%2C2.6L7%2C7.8L7%2C7.8z%22%2F%3E%0D%0A%3C%2Fsvg%3E');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: '';
+	height: 20px;
+	margin-top: -10px;
+	pointer-events: none;
+	position: absolute;
+	right: 14px;
+	top: 50%;
+	width: 20px;
+}
+
+.Vlt-label {
+	display: block;
+	font-size: 1.4rem;
+	line-height: 1.5;
+	margin-bottom: $unit0;
+	text-align: left;
+
+	label {
+		font-size: 1.4rem;
+	}
+
+	& + .Vlt-radio,
+	& + .Vlt-checkbox,
+	& + .Vlt-form__element {
+		margin-top: $unit0;
+	}
+}
+
+// autofill background for Chrome
+.Vlt-input {
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus {
+		box-shadow: 0 0 0px 1000px $purple-lighter inset;
+	}
+
+	&.Vlt-input--round {
+		input {
+			border-radius: 46px;
+		}
+	}
+}
+
+.Vlt-select {
+	&.Vlt-select--round {
+		select {
+			border-radius: 46px;
+		}
+	}
+}
+
+.Vlt-input,
+.Vlt-select,
+.Vlt-custom-select,
+.Vlt-textarea {
+	max-width: 100%;
+	position: relative;
+}
+
+.Vlt-input input,
+.Vlt-select select,
+.Vlt-textarea textarea,
+.Vlt-custom-select__input {
+	appearance: none; // prevents box shadow on iOS
+	background: $white;
+	border: 1px solid $grey;
+	border-radius: 5px;
+	box-shadow: none;
+	color: $black;
+	display: block;
+	font-size: 1.4rem;
+	height: 40px;
+	padding-left: 12px;
+	transition: background-color .5s, border-color .5s;
+	width: 100%;
+
+	&:hover {
+		border-color: $black;
+	}
+
+	&:focus {
+		@extend .Vlt-form-focus-style;
+	}
+
+	&:invalid {
+		@extend .Vlt-form-error-style;
+	}
+
+	&:disabled {
+		@extend .Vlt-form-disabled-readonly-style;
+		color: $grey-dark;
+		cursor: default;
+	}
+
+	&[readonly] {
+		@extend .Vlt-form-disabled-readonly-style;
+	}
+}
+
+.Vlt-composite {
+	display: flex !important;
+	flex-flow: row;
+	position: relative;
+
+	.Vlt-composite {
+		flex: 1;
+	}
+
+	.Vlt-input,
+	.Vlt-select {
+		flex: 1;
+		position: relative;
+
+		.Vlt-form__element--elastic & {
+			flex: 0;
+			flex-basis: auto;
+		}
+	}
+
+	&--appendedicon {
+		.Vlt-input input,
+		.Vlt-select select {
+			padding-right: 40px;
+		}
+	}
+
+	.Vlt-composite:first-child .Vlt-input input,
+	&:not(.Vlt-composite--appendedicon) .Vlt-input:first-child input,
+	&:not(.Vlt-composite--appendedicon) .Vlt-select:first-child select {
+		border-bottom-right-radius: 0;
+		border-right: 0;
+		border-top-right-radius: 0;
+	}
+
+	&__append,
+	&__prepend {
+		.Vlt-btn,
+		.Vlt-dropdown__btn,
+		.Vlt-native-dropdown select {
+			@extend %Vlt-btn--app;
+			border: 1px solid $grey;
+			margin: 0 !important;
+			padding-bottom: 7px;
+			padding-top: 7px;
+
+			&:hover {
+				transform: scale(1);
+			}
+
+			.Vlt-form__element--big & {
+				@extend %Vlt-btn--large;
+				padding: 10px 24px;
+
+				&.Vlt-btn--icon {
+					@extend %Vlt-btn--icon;
+				}
+			}
+		}
+
+		.Vlt-dropdown__btn,
+		.Vlt-native-dropdown select,
+		.Vlt-btn:not(.Vlt-btn--primary):not(.Vlt-btn--secondary):not(.Vlt-btn--quaternary):not(.Vlt-btn--destructive):not(.Vlt-btn--indigo):not(.Vlt-btn--orange):not(.Vlt-btn--white) {
+			@extend %Vlt-btn--tertiary;
+		}
+
+		.Vlt-btn {
+			&--primary,
+			&--secondary,
+			&--quaternary,
+			&--destructive,
+			&--indigo,
+			&--orange {
+				border: 0;
+			}
+		}
+
+		.Vlt-dropdown__btn,
+		.Vlt-native-dropdown {
+			&:after {
+				$fill-color: encode-hex-code($black);
+				background-image: url('data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20viewBox%3D%220%200%2020%2020%22%20style%3D%22enable-background%3Anew%200%200%2020%2020%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M7%2C7.8C6.7%2C7.5%2C6.2%2C7.6%2C5.9%2C7.9S5.7%2C8.7%2C6%2C9l4%2C3.4l4-3.4c0.3-0.3%2C0.3-0.8%2C0-1.1%0D%0A%09c-0.3-0.3-0.7-0.3-1-0.1l-3%2C2.6L7%2C7.8L7%2C7.8z%22%2F%3E%0D%0A%3C%2Fsvg%3E');
+			}
+		}
+	}
+
+	&__append {
+		position: relative;
+		z-index: 2;
+
+		.Vlt-btn,
+		.Vlt-dropdown__btn,
+		.Vlt-native-dropdown select {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
+
+		&--icon {
+			height: 100%;
+			padding: 11px 12px;
+			position: absolute;
+			right: 0;
+			width: 42px;
+
+			svg {
+				fill: $grey-dark;
+				height: 18px;
+				position: relative;
+				width: 18px;
+			}
+		}
+	}
+
+	&__prepend {
+		position: relative;
+		z-index: 2;
+
+		.Vlt-btn,
+		.Vlt-dropdown__btn,
+		.Vlt-native-dropdown select {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+
+		&:not(.Vlt-composite__prepend--icon) + .Vlt-input input,
+		&:not(.Vlt-composite__prepend--icon) + .Vlt-select select {
+			border-bottom-left-radius: 0;
+			border-left: 0;
+			border-top-left-radius: 0;
+		}
+
+		&--icon {
+			height: 100%;
+			padding: 11px 12px;
+			position: absolute;
+			width: 42px;
+
+			svg {
+				fill: $black;
+				height: 18px;
+				width: 18px;
+			}
+
+			& + .Vlt-input input,
+			& + .Vlt-select select {
+				padding-left: 42px;
+			}
+		}
+	}
+
+	.Vlt-btn,
+	.Vlt-dropdown__btn
+	.Vlt-native-dropdown select {
+		margin: 0;
+	}
+
+	.Vlt-input {
+		input {
+			&[readonly],
+			&:disabled {
+				border-color: $grey;
+			}
+		}
+	}
+}
+
+.Vlt-textarea {
+	textarea {
+		height: auto;
+		padding-bottom: $unit1;
+		padding-top: $unit1;
+		resize: vertical;
+	}
+}
+
+.Vlt-select,
+.Vlt-custom-select {
+
+	&:after {
+		@extend %select-arrow;
+	}
+}
+
+.Vlt-select select,
+.Vlt-custom-select__input {
+	appearance: none;
+	cursor: pointer;
+	padding-right: 42px;
+	text-indent: 1px;
+	text-overflow: '';
+
+	&::-ms-expand {
+	    display: none;
+	}
+}
+
+.Vlt-form__group {
+	align-items: flex-end;
+	display: flex;
+	flex-flow: row wrap;
+
+	.Vlt-form__element {
+		margin-right: $unit2;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	> .Vlt-btn {
+		margin-bottom: $unit1;
+	}
+
+	> .Vlt-form__element__error,
+	> .Vlt-form__element__hint {
+		flex: 0 0 100%;
+		margin-bottom: $unit0;
+	}
+
+	& + .Vlt-form__group,
+	& + .Vlt-form__element {
+		margin-top: 0; // This ensures vertical spacing consistency
+	}
+
+	&--M-plus {
+		@media #{$S-only} {
+			display: block;
+		}
+	}
+
+	&--inline {
+		display: inline-flex;
+	}
+
+	&--stretch {
+		.Vlt-form__element {
+			flex: auto;
+		}
+	}
+}
+
+.Vlt-form__element {
+	padding: $unit1 0;
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
+
+	&__hint,
+	&__error {
+		display: block;
+		flex: 0 0 100%;
+		font-size: 1.2rem;
+		line-height: 1.33;
+		margin-top: 6px;
+		text-align: left;
+	}
+
+	&__hint {
+		color: $grey-darker;
+	}
+
+	&__error {
+		color: $red;
+
+		&:before {
+			$fill-color: encode-hex-code($red);
+			background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M8%200C3.6%200%200%203.6%200%208C0%2012.4%203.6%2016%208%2016C12.4%2016%2016%2012.4%2016%208C16%203.6%2012.4%200%208%200ZM8%2012C7.4%2012%207%2011.6%207%2011C7%2010.4%207.4%2010%208%2010C8.6%2010%209%2010.4%209%2011C9%2011.6%208.6%2012%208%2012ZM9%209H7V4H9V9Z%22%2F%3E%0A%3C%2Fsvg%3E');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			content: '';
+			display: inline-block;
+			height: 16px;
+			margin-right: 6px;
+			vertical-align: bottom;
+			width: 16px;
+		}
+	}
+
+	&--error {
+		input,
+		select,
+		textarea,
+		.Vlt-radio input:not(:checked) + .Vlt-radio__icon,
+		.Vlt-checkbox input:not(:checked) + .Vlt-checkbox__icon {
+			@extend .Vlt-form-error-style;
+		}
+
+		.Vlt-checkbox  {
+			color: $red;
+
+			input:not(:checked) + .Vlt-checkbox__icon {
+				background: $white !important;
+			}
+		}
+
+		&.Vlt-form__element--big {
+			label {
+				color: $red;
+			}
+
+			.Vlt-textarea {
+				textarea:not(:focus) + * {
+					background-color: $red-lighter;
+				}
+			}
+		}
+	}
+
+	&--valid {
+		input,
+		select,
+		textarea {
+			@extend .Vlt-form-valid-style;
+		}
+	}
+
+	&--elastic {
+		input,
+		select,
+		.Vlt-input,
+		.Vlt-select {
+			display: inline-block;
+			margin-left: 0;
+			margin-right: 0;
+			width: auto;
+
+			& + input,
+			& + select,
+			& + .Vlt-input,
+			& + .Vlt-select {
+				margin-left: $unit2;
+			}
+		}
+
+		textarea,
+		.Vlt-textarea {
+			display: inline-block;
+			width: auto;
+		}
+	}
+
+	&--inline-content {
+		.Vlt-radio,
+		.Vlt-checkbox {
+			display: inline-block;
+			margin-bottom: $unit2;
+			margin-right: $unit2;
+			margin-top: $unit0 !important;
+		}
+	}
+
+	.Vlt-dropdown__btn {
+		margin: 0;
+	}
+}
+
+.Vlt-radio,
+.Vlt-checkbox {
+	position: relative;
+
+	input {
+		appearance: none;
+		height: 0px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		width: 0px;
+
+		&:focus,
+		&:active {
+			box-shadow: none;
+			outline: none;
+
+			& + .Vlt-radio__icon {
+				@extend .Vlt-form-focus-style;
+			}
+		}
+
+		&:disabled {
+			& + .Vlt-radio__icon {
+				@extend .Vlt-form-disabled-readonly-style;
+			}
+
+			&:active {
+				& + .Vlt-radio__icon,
+				& + .Vlt-checkbox__icon {
+					box-shadow: none;
+				}
+			}
+		}
+
+		&:invalid {
+			& + .Vlt-radio__icon,
+			& + .Vlt-checkbox__icon {
+				@extend .Vlt-form-error-style;
+			}
+
+			&:focus {
+				& + .Vlt-radio__icon,
+				& + .Vlt-checkbox__icon {
+					box-shadow: 0 0 5px rgba($red, 0.5);
+				}
+			}
+		}
+	}
+
+	label {
+		// We removed cursor: pointer because it would add complications in case it's disabled
+		align-items: flex-start;
+		display: flex;
+		text-align: left;
+	}
+
+	&__button {
+		display: block;
+		flex: 0 0 22px;
+		height: 22px;
+		margin-right: 10px;
+		margin-top: -1px;
+		position: relative;
+		width: 22px;
+	}
+
+	&__icon {
+		border: 2px solid $grey;
+		display: block;
+		height: 100%;
+		transition: all 0.2s;
+		width: 100%;
+
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			transform: scale(0.1, 0.1);
+			transition: transform 0.2s ease-out;
+		}
+	}
+
+	&:hover {
+		.Vlt-radio__icon,
+		.Vlt-checkbox__icon {
+			border-color: $black;
+		}
+	}
+
+	& + .Vlt-radio,
+	& + .Vlt-checkbox,
+	& + .Vlt-form__element__error,
+	& + .Vlt-form__element__hint {
+		margin-top: $unit2;
+	}
+
+	&--inline {
+		display: inline-block;
+		margin-bottom: $unit2;
+		margin-right: $unit2;
+		margin-top: $unit0 !important;
+	}
+}
+
+.Vlt-radio {
+	&__icon {
+		border-radius: 100%;
+		transition: all 0.2s;
+
+		&:after {
+			border-radius: 100%;
+			height: 10px;
+			left: 50%;
+			margin-left: -5px;
+			margin-top: -5px;
+			top: 50%;
+			width: 10px;
+		}
+	}
+
+	&__button {
+
+		input {
+			&:checked ~ .Vlt-radio__icon {
+				&:after {
+					background: $black;
+					transform: scale(1, 1);
+				}
+			}
+		}
+	}
+}
+
+.Vlt-checkbox {
+
+	&--error {
+		.Vlt-checkbox input:not(:checked) + .Vlt-checkbox__icon {
+			background-color: $white;
+		}
+	}
+
+	&__icon {
+		background-color: $white;
+		border: 1px solid $grey;
+		border-radius: 4px;
+
+		&:after {
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 14px 14px;
+			content: '';
+			height: 100%;
+			left: 0;
+			top: 0;
+			transform: scale(1, 1);
+			width: 100%;
+		}
+	}
+
+	&__button {
+		input {
+			&:hover:not(:checked) ~ .Vlt-checkbox__icon {
+				border-color: $grey-dark;
+			}
+
+			&:focus ~ .Vlt-checkbox__icon {
+				border-color: $black;
+			}
+
+			&:checked ~ .Vlt-checkbox__icon,
+			&:checked:disabled ~ .Vlt-checkbox__icon {
+				background-color: $black;
+				border-color: $black;
+
+				&:after {
+					$fill-color: encode-hex-code($white);
+					background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M21.45%203.45L7.5%2017.4L2.55%2012.45C1.95%2011.85%201.05%2011.85%200.45%2012.45C-0.15%2013.05%20-0.15%2013.95%200.45%2014.55L6.45%2020.55C6.75%2020.85%207.05%2021%207.5%2021C7.95%2021%208.25%2020.85%208.55%2020.55L23.55%205.55C24.15%204.95%2024.15%204.05%2023.55%203.45C22.95%202.85%2022.05%202.85%2021.45%203.45Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+				}
+			}
+
+			&:hover:not(:checked):disabled ~ .Vlt-checkbox__icon,
+			&:not(:checked):disabled ~ .Vlt-checkbox__icon {
+				background-color: $grey-lighter;
+				border-color: $grey-light;
+			}
+
+			&:hover:checked:disabled ~ .Vlt-checkbox__icon,
+			&:checked:disabled ~ .Vlt-checkbox__icon {
+				opacity: 0.3;
+			}
+		}
+	}
+
+	&--partial {
+		.Vlt-checkbox__button {
+			input {
+				~ .Vlt-checkbox__icon,
+				&:hover ~ .Vlt-checkbox__icon,
+				&:checked ~ .Vlt-checkbox__icon,
+				&:disabled ~ .Vlt-checkbox__icon,
+				&:hover:disabled ~ .Vlt-checkbox__icon {
+					background-color: $black;
+					border-color: $black;
+				}
+
+				&:hover:disabled ~ .Vlt-checkbox__icon,
+				&:disabled ~ .Vlt-checkbox__icon {
+					opacity: 0.3;
+				}
+			}
+		}
+
+		.Vlt-checkbox__icon {
+			&:after {
+				$fill-color: encode-hex-code($white);
+				background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M15%207H1C0.4%207%200%207.4%200%208C0%208.6%200.4%209%201%209H15C15.6%209%2016%208.6%2016%208C16%207.4%2015.6%207%2015%207Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+			}
+		}
+	}
+}
+
+.Vlt-form-error-style {
+	background: $red-lighter;
+	border-color: $red;
+
+	&:hover {
+		border-color: $red;
+	}
+}
+
+.Vlt-form-valid-style {
+	border-color: $green;
+
+	&:hover {
+		border-color: $green;
+	}
+}
+
+.Vlt-form-focus-style {
+	background: $white;
+	border-color: $black;
+	outline: none;
+
+	&:hover {
+		border-color: $black;
+	}
+}
+
+.Vlt-form-disabled-readonly-style {
+	background: $grey-lighter;
+	border-color: $grey-light;
+	box-shadow: none;
+
+	&:hover {
+		border-color: $grey-light;
+	}
+}
+
+// Inspired from https://github.com/tonystar/float-label-css
+// by Tony Star
+// Compatibility https://caniuse.com/#feat=css-placeholder-shown
+
+.Vlt-form__element--big {
+	display: block;
+	position: relative;
+
+	label {
+		color: $grey-darker;
+		cursor: text;
+		font-size: 1.2rem;
+		left: 14px;
+		line-height: 1.6rem;
+		opacity: 1;
+		pointer-events: none;
+		position: absolute;
+		top: 7px;
+		transition: all 0.2s, background-color 0.5s;
+	}
+
+	textarea {
+		width: 100%;
+	}
+
+	.Vlt-input,
+	.Vlt-select,
+	.Vlt-custom-select,
+	.Vlt-textarea {
+		input,
+		select,
+		textarea,
+		.Vlt-custom-select__input {
+			border-radius: 6px;
+			height: 4.8rem;
+			padding: 20px 14px 6px;
+
+			&::placeholder {
+				color: $grey;
+				opacity: 1;
+				transition: all 0.2s;
+			}
+
+			&:placeholder-shown:not(:focus)::placeholder {
+				opacity: 0;
+			}
+
+			&:placeholder-shown:not(:focus) + * {
+				font-size: 1.6rem;
+				margin-top: -0.8rem;
+				top: 50%;
+			}
+		}
+
+		select {
+			padding-right: 50px;
+		}
+
+		textarea {
+			height: auto;
+			min-height: 4.8rem;
+
+			+ * {
+				background-color: $white;
+				border-top-right-radius: 6px;
+				padding-top: 6px;
+				right: 14px;
+				top: 1px;
+			}
+
+			&:placeholder-shown:not(:focus) + * {
+				margin-top: 0;
+				top: 1rem;
+			}
+
+			&[readonly] + *,
+			&:disabled + * {
+				background-color: $grey-lighter;
+			}
+		}
+	}
+
+	.Vlt-select,
+	.Vlt-custom-select {
+		&:after {
+			height: 24px;
+			margin-top: -12px;
+			width: 24px;
+		}
+	}
+
+	.Vlt-custom-select__input {
+		@extend .Vlt-truncate;
+		text-align: left;
+	}
+
+	.Vlt-form__element__error,
+	.Vlt-form__element__hint {
+		margin-top: 8px;
+	}
+}
+
+.Vlt-dropdown {
+	.Vlt-composite {
+		flex: 1;
+		z-index: 2;
+
+		&:first-child {
+			margin-bottom: -1px;
+		}
+
+		.Vlt-composite__append {
+			.Vlt-btn {
+				transition: border-bottom-right-radius 0s;
+			}
+		}
+
+		+ .Vlt-dropdown__panel {
+			z-index: 1;
+
+			.Vlt-dropdown__panel__content {
+				border: 1px solid $grey;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+				box-shadow: 0px 4px 8px rgba($black, 0.15);
+			}
+		}
+	}
+
+	&--expanded {
+		.Vlt-composite {
+			.Vlt-input {
+				input {
+					border-bottom-left-radius: 0;
+					transition: border-bottom-left-radius 0s;
+				}
+			}
+
+			.Vlt-composite__append {
+				.Vlt-btn {
+					border-bottom-right-radius: 0;
+				}
+			}
+		}
+	}
+}

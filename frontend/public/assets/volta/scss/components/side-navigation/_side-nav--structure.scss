@@ -1,0 +1,627 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+$hover-blue: #649abc;
+$hover-pink: #a4237a;
+
+.Vlt-sidenav {
+	background: $grey-lighter;
+	display: flex;
+	flex: 0 0 270px;
+	flex-flow: column;
+	font-weight: 600;
+	height: 100vh;
+	padding-bottom: 10px;
+	width: 270px;
+
+	@media #{$S-only} {
+		height: 100vh;
+		left: 0;
+		padding-top: 5px;
+		position: fixed;
+		top: 0;
+		transform: translate(-100vw, 0);
+		transition: transform 0.2s;
+		width: 80vw;
+		z-index: $z-index-sidenav-mobile;
+
+		&_visible {
+			box-shadow: 4px 0 12px rgba($black, 0.15), 20vw 0 0 rgba($black, 0.15);
+			transform: translate(0, 0);
+		}
+	}
+
+	&--animate {
+		transition: width 0.2s, flex-basis 0.2s;
+	}
+
+	&__mobile-trigger {
+		display: none;
+
+		@media #{$S-only} {
+			display: block;
+		}
+	}
+
+	&__block {
+		flex-shrink: 0;
+		padding: 10px 12px;
+		position: relative;
+
+		&:before,
+		&:after {
+			content: '';
+			display: none;
+			flex: 0 0 100%;
+			height: 1px;
+			left: 20px;
+			margin: 0 auto;
+			position: absolute;
+			top: 0;
+			width: calc(100% - 40px);
+		}
+
+		&:after {
+			bottom: 0;
+			top: auto;
+		}
+
+		img,
+		svg {
+			max-width: 100%;
+		}
+
+		&--logo {
+			align-items: center;
+			display: flex;
+			flex-flow: row wrap;
+			padding-bottom: 15px;
+			padding-top: 15px;
+
+			.Vlt-sidenav__logo {
+				flex: 1;
+				margin-left: $unit0;
+
+				svg {
+					width: 100%; // For IE
+				}
+			}
+		}
+
+		&--link {
+			padding: 0;
+		}
+
+		&--border-top {
+			&:before {
+				display: block;
+			}
+		}
+
+		&--border-bottom {
+			&:after {
+				display: block;
+			}
+		}
+	}
+
+	&__scroll {
+		background-image: linear-gradient(to bottom, rgba($black, 0.05) 0%, transparent 4px), //top
+			linear-gradient(to bottom, transparent calc(100% - 4px), rgba($black, 0.05) 100%); //bottom
+		background-position: 20px 0;
+		background-repeat: no-repeat;
+		background-size: calc(100% - 40px) 100%, calc(100% - 40px) 100%, 14px 100%, 14px 100%;
+		flex: auto; // not flex: 1 because IE11 needs flex-basis: auto
+		height: 100%; // needed for shadowing, won't be 100% it will adjust to flex
+		overflow-y: auto;
+		position: static; // never give this position relative for any reason, it will prevent tooltips and dropdowns
+
+		@media #{$S-only} {
+			-webkit-overflow-scrolling: touch;
+			overflow-y: scroll;
+		}
+
+		.Vlt-sidemenu {
+			background: linear-gradient(0deg, $grey-lighter 10px, transparent 10px), // top
+				linear-gradient(0deg, transparent calc(100% - 10px), $grey-lighter calc(100% - 10px)) 100% 0; // bottom
+		}
+	}
+
+	.Vlt-sidemenu {
+		list-style: none;
+		margin: 0;
+		min-height: 100%; // not height, for shadowing
+		padding: 0 12px 10px; // space to allow for the browser url notice
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		// Setting main margins with nesting
+
+		.Vlt-sidemenu__title {
+			margin-bottom: 0;
+			margin-left: 0px;
+		}
+
+		li {
+			margin: 0;
+			padding: 0;
+			padding-top: 3px;
+
+			.Vlt-sidemenu__link,
+			.Vlt-sidemenu__trigger {
+				font-size: 1.4rem;
+				padding-left: 10px;
+				padding-right: 35px;
+
+				& + .Vlt-sidemenu__tooltip {
+					display: none;
+				}
+			}
+
+			li {
+				&:first-child {
+					padding-top: 0px;
+				}
+
+				.Vlt-sidemenu__link,
+				.Vlt-sidemenu__trigger {
+					margin-left: 9px;
+					padding-left: 12px;
+
+					svg {
+						display: none;
+					}
+				}
+
+				.Vlt-sidemenu__title {
+					padding-left: 21px;
+				}
+			}
+		}
+
+		// Dropdown arrow
+		&__trigger {
+			+ ul {
+				border-left: 1px solid $grey-light;
+			}
+
+			span:last-of-type:not(.Vlt-badge) {
+				&:after {
+					$fill-color: encode-hex-code($grey-dark);
+					background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M3.38326%207.96544C3.58628%207.68629%203.97717%207.62457%204.25632%207.82759L9.99983%2012.0047L15.7433%207.82759C16.0225%207.62457%2016.4134%207.68629%2016.6164%207.96544C16.8194%208.2446%2016.7577%208.63549%2016.4785%208.83851L10.3674%2013.283C10.1483%2013.4423%209.85138%2013.4423%209.63222%2013.283L3.52111%208.83851C3.24195%208.63549%203.18023%208.2446%203.38326%207.96544Z%22%20fill%3D%22#{$fill-color}%22%2F%3E%0A%3C%2Fsvg%3E');
+					background-position: center center;
+					background-repeat: no-repeat;
+					background-size: contain;
+					content: '';
+					display: inline-block;
+					height: 20px;
+					position: absolute;
+					right: 10px;
+					top: 8px;
+					transition: transform 0.2s;
+					width: 16px;
+				}
+			}
+
+			&_active {
+				span:last-of-type:not(.Vlt-badge) {
+					&:after {
+						transform: rotate(180deg);
+					}
+				}
+			}
+
+			&_current {
+				&:not(.Vlt-sidemenu__trigger_active) {
+					background: $grey-light;
+				}
+			}
+		}
+
+		&__link,
+		&__trigger {
+			align-items: flex-start;
+			border-radius: 5px;
+			color: $black;
+			cursor: pointer;
+			display: flex;
+			justify-content: left;
+			line-height: 1.5;
+			margin: 0;
+			padding: $unit1 10px;
+			text-decoration: none;
+			transition: background 0.2s;
+
+			&:hover {
+				background: $grey-light;
+				text-decoration: none;
+			}
+
+			&_active:not(.Vlt-sidemenu__trigger_active) {
+				background: $white;
+				color: $black;
+				font-weight: 600;
+
+				svg {
+					fill: $black;
+				}
+			}
+
+			&--disabled {
+				cursor: default;
+				pointer-events: none;
+			}
+
+			svg {
+				fill: $black;
+				flex: 0 0 17px;
+				height: 21px;
+				margin-right: 12px;
+				vertical-align: middle;
+				width: 17px;
+			}
+
+			&--disabled {
+				color: $grey;
+
+				svg {
+					fill: $grey;
+				}
+			}
+
+			.Vlt-badge {
+				margin-left: 8px;
+				margin-top: 1px;
+				position: relative;
+				z-index: 2;
+			}
+
+			.Vlt-sidemenu__label {
+				.Vlt-badge {
+					margin-bottom: 2px;
+					margin-top: 0;
+				}
+			}
+		}
+
+		// Titles
+		&__title {
+			color: $grey-darker;
+			font-size: 1.2rem;
+			font-weight: 600;
+			margin: 0;
+			padding: 8px 10px;
+			text-transform: uppercase;
+
+			&--border {
+				border-top: 1px solid $grey-light;
+				margin-top: 8px;
+				padding-top: 19px;
+			}
+		}
+
+		// Behavior of triggers (expanding and collapsing branches)
+
+		&__trigger {
+			position: relative;
+
+			&:not(.Vlt-sidemenu__trigger_active) + ul {
+			    margin: 0;
+			    opacity: 0;
+			    padding: 0;
+			    transition: opacity 0.1s,
+			    	padding 0.2s,
+			    	margin  0.2s;
+
+	            & * {
+	            	border: 0;
+					font-size: 0 !important;
+					line-height: 0;
+					margin-bottom: 0 !important;
+					margin-top: 0 !important;
+					opacity: 0;
+					padding-bottom: 0 !important;
+					padding-top: 0 !important;
+					transition: all 0.1s;
+
+			    	svg,
+			    	.Vlt-badge {
+			    		height: 0;
+			    		transition: height 0.1s;
+			    	}
+	            }
+			}
+
+			&_active {
+
+				& + ul {
+					margin: 2px 0 2px 18px;
+					margin-bottom: 0px;
+					margin-left: 18px;
+					margin-top: 2px;
+					transition: font-size 0.2s,
+		                margin 0.2s,
+		                opacity 0.2s,
+		                padding 0.2s;
+
+		            & > * {
+		            	opacity: 1;
+		            	transition: all 0.2s;
+		            }
+				}
+			}
+
+			.Vlt-sidemenu__label {
+				max-width: 100%;
+			}
+		}
+
+		// Compressed version
+		// For longer menus, it compresses the padding of menu items without icons while leaving the ones with icons the same
+
+		&__list--compressed {
+			.Vlt-sidemenu__link,
+			.Vlt-sidemenu__trigger {
+				padding: $unit0 10px;
+			}
+
+			.Vlt-sidemenu__trigger {
+				margin-bottom: 4px;
+			}
+		}
+	}
+
+	&__mobile {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		left: 0;
+		padding: 10px;
+		position: fixed;
+		top: 0;
+		width: 100%;
+
+		@media #{$M-plus} {
+			display: none;
+		}
+
+		&__logo {
+			height: 34px;
+		}
+
+		button {
+			@extend .reset-button;
+			flex: 0 0 40px;
+			height: 40px;
+
+			svg {
+				height: 24px;
+				width: 24px;
+			}
+		}
+
+		.Vlt-template--header & {
+			padding-bottom: 5px;
+			padding-top: 5px;
+		}
+	}
+
+	hr {
+		border-top: 1px solid $grey-light;
+	}
+
+	.Vlt-sidenav {
+		&__link {
+			&:hover {
+				background: $grey-light;
+			}
+		}
+	}
+
+	.Vlt-sidetabs {
+
+		&--bottom {
+			border-top: 1px solid $grey-light;
+		}
+
+		&--top {
+			border-bottom: 1px solid $grey-light;
+		}
+
+		.Vlt-js-tabs__link {
+
+			svg {
+				fill: $grey-dark !important;
+			}
+
+			&:hover {
+				&:after {
+					background: $grey-lighter;
+				}
+
+				svg {
+					fill: $grey-darker !important;
+				}
+			}
+
+			&_active,
+			&:active {
+				&:after {
+					background: $black;
+				}
+
+				svg {
+					fill: $grey-darker !important;
+				}
+			}
+		}
+	}
+
+	.Vlt-sidenav__block {
+		&:before,
+		&:after {
+			background: $grey-light;
+		}
+
+		&--logo {
+			.Vlt-sidenav__collapse {
+				svg {
+					fill: $grey-dark;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--collapsed {
+		@media #{$M-plus} {
+			.Vlt-sidemenu__title {
+				border-bottom: 1px solid $grey-light;
+			}
+		}
+	}
+
+	&.Vlt-sidenav--rounded {
+		&,
+		.Vlt-sidenav__scroll {
+			border-radius: 0 16px 16px 0;
+		}
+	}
+
+	&.Vlt-sidenav--active-blue,
+	&.Vlt-sidenav--active-green,
+	&.Vlt-sidenav--active-indigo,
+	&.Vlt-sidenav--active-orange,
+	&.Vlt-sidenav--active-purple,
+	&.Vlt-sidenav--active-purple-dark,
+	&.Vlt-sidenav--active-red,
+	&.Vlt-sidenav--active-yellow {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					color: $white;
+
+					svg {
+						fill: $white;
+					}
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-white {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $white;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-grey {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $grey-light;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-blue {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $blue;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-green {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $green;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-indigo {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $indigo;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-orange {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $orange;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-purple {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $purple;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-purple-dark {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $purple-dark;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-red {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $red;
+				}
+			}
+		}
+	}
+
+	&.Vlt-sidenav--active-yellow {
+		.Vlt-sidemenu {
+			&__link {
+				&_active:not(.Vlt-sidemenu__trigger_active) {
+					background: $yellow;
+				}
+			}
+		}
+	}
+}
+
+body {
+	@media #{$S-only} {
+		&.Vlt-body--has-sidenav {
+			padding-top: 60px;
+		}
+
+		&.Vlt-body--mobile-menu-open {
+			overflow: hidden;
+		}
+	}
+}

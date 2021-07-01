@@ -1,0 +1,26 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-progress {
+	background-color: rgba($grey-darker, 0.45);
+	border-radius: 10px;
+	display: block;
+	height: 6px;
+	margin: 7px 0;
+	overflow: hidden;
+	position: relative;
+
+	&__bar {
+		background-image: linear-gradient(to right, $gradient-blue, $gradient-purple);
+		height: 100%;
+		left: 0;
+		position: absolute;
+		transition: width 0.2s ease-out;
+		width: 0%;
+
+		&[class*='Vlt-bg-'] {
+			background-image: none;
+		}
+	}
+}

@@ -1,0 +1,425 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-list {
+	margin-bottom: $unit2;
+	padding-left: $unit2;
+
+	ul,
+	ol {
+		margin-top: $unit1;
+		padding-left: $unit3;
+	}
+
+	li {
+		margin-bottom: 0.5em;
+		position: relative;
+	}
+}
+
+.Vlt-list--simple {
+
+	& > li {
+		&:before {
+			color: $black;
+		}
+
+		& > ul > li,
+		& > ol > li {
+			&:before {
+				color: $grey-darker;
+			}
+
+			& > ul > li,
+			& > ol > li {
+				&:before {
+					color: $black;
+				}
+			}
+		}
+	}
+}
+
+ul.Vlt-list--simple {
+
+	& > li {
+		&:before {
+			content: '•';
+			left: -$unit2;
+			position: absolute;
+			top: 0em;
+		}
+	}
+}
+
+ol.Vlt-list--simple {
+	counter-reset: list;
+	padding-left: 20px;
+
+	ol {
+		counter-reset: list;
+	}
+
+	& > li {
+		&:before {
+			content: counter(list) '.';
+			counter-increment: list;
+			font-weight: 600;
+			left: -20px;
+			position: absolute;
+			top: 0em;
+		}
+	}
+}
+
+.Vlt-list--square {
+	& > li {
+		margin-bottom: 30px;
+		padding-left: 30px;
+		position: relative;
+
+		&:before {
+			background: $blue-dark;
+			border-radius: 2px;
+			content: '';
+			height: 10px;
+			left: 5px;
+			position: absolute;
+			top: 0.6em;
+			width: 10px;
+		}
+
+		& > li {
+			&:before {
+				color: inherit;
+				content: inherit;
+			}
+		}
+	}
+}
+
+.Vlt-list--icon {
+	padding-left: 0;
+
+	& > li {
+		margin-bottom: $unit2;
+		padding-left: 30px;
+		position: relative;
+
+		&:before {
+			display: none;
+		}
+
+		& > svg {
+			background: none;
+			height: 20px;
+			left: 0px;
+			position: absolute;
+			top: 0px;
+			width: 20px;
+		}
+	}
+}
+
+.Vlt-big-number {
+	margin-top: $unit1;
+	min-height: 40px;
+	padding-left: 50px;
+	padding-top: $unit0;
+	position: relative;
+
+	&:before {
+		align-items: center;
+		background: $grey-dark;
+		border-radius: 50px;
+	    color: $white;
+	    content: attr(data-index);
+		display: flex;
+		font-size: 1.5rem;
+		font-weight: bold;
+		height: 30px;
+		justify-content: center;
+		left: 5px;
+		position: absolute;
+		top: 0;
+		width: 30px;
+	}
+
+	&--h3 {
+		&:before {
+			top: 0;
+		}
+	}
+
+	&__inset {
+		margin-left: 48px;
+	}
+}
+
+.Vlt-list--big-number {
+	counter-reset: list;
+
+	& > li,
+	ol > li {
+		@extend .Vlt-big-number;
+		counter-increment: list;
+		padding-left: $unit3;
+
+		&:before {
+			content: counter(list);
+			left: -$unit2;
+			top: 0;
+
+			.Vlt-bg-blue & {
+				background: $blue;
+			}
+		}
+	}
+
+	&-black {
+		& > li,
+		ol > li {
+			&:before {
+				background: $black;
+			}
+		}
+	}
+
+	&-grey {
+		& > li,
+		ol > li {
+			&:before {
+				background: $grey;
+			}
+		}
+	}
+
+	&-white {
+		& > li,
+		ol > li {
+			&:before {
+				background: $white;
+				color: $black;
+			}
+		}
+	}
+
+	&-orange {
+		& > li,
+		ol > li {
+			&:before {
+				background: $orange;
+			}
+		}
+	}
+
+	&-blue {
+		& > li,
+		ol > li {
+			&:before {
+				background: $blue;
+			}
+		}
+	}
+
+	&-red {
+		& > li,
+		ol > li {
+			&:before {
+				background: $red;
+			}
+		}
+	}
+
+	&-green {
+		& > li,
+		ol > li {
+			&:before {
+				background: $green;
+			}
+		}
+	}
+
+	&-purple {
+		& > li,
+		ol > li {
+			&:before {
+				background: $purple;
+			}
+		}
+	}
+
+	&-yellow {
+		& > li,
+		ol > li {
+			&:before {
+				background: $yellow;
+			}
+		}
+	}
+
+	&-indigo {
+		& > li,
+		ol > li {
+			&:before {
+				background: $indigo;
+			}
+		}
+	}
+}
+
+.Vlt-number {
+	align-items: center;
+	background: $grey-dark;
+	border-radius: 50px;
+	color: $white;
+	display: inline-flex;
+	font-size: 1.5rem;
+	font-weight: bold;
+	height: 30px;
+	justify-content: center;
+	margin: $unit0;
+	width: 30px;
+
+	&:before {
+		content: attr(data-index);
+	}
+
+	&--dialer {
+		background: $grey-lighter;
+		border-radius: $unit1;
+		color: $black;
+		flex-flow: column;
+		font-weight: 400;
+		height: 36px;
+		line-height: 1;
+		width: 36px;
+
+		small {
+			font-size: 1rem;
+			line-height: 1rem;
+		}
+	}
+
+	&--outlined {
+		background: none;
+		border-color: $black;
+		border-style: solid;
+		border-width: 1px;
+		color: $black;
+	}
+
+	&--small {
+		font-size: 1.2rem;
+		height: 18px;
+		width: 18px;
+	}
+}
+
+.Vlt-list-item {
+	display: flex;
+	flex: 1;
+	position: relative;
+
+	&__meta {
+		align-self: center;
+		color: $grey-darker;
+		font-size: 1.2rem;
+	}
+
+	&__icon {
+		&,
+		& svg {
+			align-items: center;
+			border-radius: 100%;
+			display: inline-flex;
+			flex: 0 0 32px;
+			height: 32px;
+			margin-right: 12px;
+			position: relative;
+			width: 32px;
+		}
+
+		& svg {
+			&.Vlt-icon--smaller {
+				height: 16px;
+				margin-bottom: 0;
+			}
+		}
+
+		.Vlt-status {
+			bottom: -2px;
+			right: -2px;
+		}
+	}
+
+	&__text {
+		align-self: center;
+		flex: 1;
+	}
+
+	&.Vlt-list-item--large {
+		margin-bottom: 0;
+		padding: 12px 0 13px;
+
+		&:after {
+			background-color: $grey-light;
+			bottom: 0;
+			content: '';
+			height: 1px;
+			left: 64px;
+			position: absolute;
+			right: 0;
+		}
+
+		&-noborder {
+			&:after {
+				display: none;
+			}
+		}
+
+		.Vlt-list-item__icon {
+			&,
+			& svg {
+				flex: 0 0 48px;
+				height: 48px;
+				margin-right: $unit2;
+				width: 48px;
+			}
+
+			.Vlt-status {
+				bottom: 1px;
+				right: 1px;
+			}
+		}
+
+		.Vlt-list-item__text {
+			font-size: 1.6rem;
+			font-weight: 600;
+			line-height: 2.3rem;
+
+			span {
+				display: block;
+				font-size: 1.4rem;
+				font-weight: normal;
+				line-height: 2.1rem;
+				margin-top: 4px;
+			}
+		}
+
+		.Vlt-list-item__text + .Vlt-btn {
+			align-self: center;
+			height: 20px;
+			min-height: 20px;
+			min-width: 20px;
+			padding: 0;
+			width: 20px;
+
+			svg {
+				height: 8px;
+				width: 8px;
+			}
+		}
+	}
+}

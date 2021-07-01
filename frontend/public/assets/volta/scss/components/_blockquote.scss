@@ -1,0 +1,35 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-blockquote {
+	display: block;
+	padding-left: 14px;
+	position: relative;
+
+	&:after {
+		background-color: currentColor;
+		border-radius: 1px;
+		content: '';
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 2px;
+
+	}
+
+	strong {
+		&:first-child {
+			color: currentColor;
+			display: block;
+			line-height: 21px;
+		}
+	}
+
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

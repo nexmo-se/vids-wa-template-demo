@@ -1,0 +1,221 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-dialpad {
+	background: $black;
+	border-radius: $unit1;
+	box-shadow: 0 5px 10px 0 rgba($black, 0.25);
+	margin: $unit1 auto;
+	max-width: 100%;
+	width: 300px;
+
+	&__keypad {
+		display: flex;
+		flex-flow: row wrap;
+		padding: $unit1 $unit1 $unit3;
+	}
+
+	&__key {
+		@extend .reset-button;
+		align-items: center;
+		border-radius: 6px;
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 33%;
+		flex-flow: row wrap;
+		height: 60px;
+		justify-content: center;
+		margin: 2px 0;
+		transition: background 0.4s;
+
+		&__main {
+			align-self: flex-start;
+			color: $white;
+			flex: 0 0 100%;
+			font-size: 3rem;
+			font-weight: 800;
+			padding-bottom: 2px;
+			padding-top: 10px;
+			text-align: center;
+		}
+
+		&__sub {
+			align-self: flex-start;
+			color: $grey-dark;
+			flex: 0 0 100%;
+			font-size: 1.2rem;
+			font-weight: 600;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		&__sub-plus {
+			font-size: 2rem;
+			font-weight: 800;
+		}
+
+		&:hover {
+			background: rgba($white, 0.15);
+		}
+
+		&:active {
+			background: rgba($white, 0.25);
+		}
+
+		svg {
+			height: 24px;
+			width: 24px;
+		}
+
+		.Vlt-btn {
+			margin: 0;
+
+			svg {
+				height: 24px;
+				margin: 0 -12px;
+				width: 24px;
+			}
+		}
+
+		&--nohover {
+			&:hover {
+				background: transparent;
+			}
+		}
+	}
+
+	&__header {
+		color: $white;
+		font-size: 1.2rem;
+		padding: 12px 32px;
+		position: relative;
+		text-align: center;
+
+		&__dismiss {
+			$fill-color: encode-hex-code($white);
+			background-color: transparent;
+			background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M17.7429%206.25714C17.4%205.91429%2016.8857%205.91429%2016.5429%206.25714L12%2010.8L7.45714%206.25714C7.11429%205.91429%206.6%205.91429%206.25714%206.25714C5.91429%206.6%205.91429%207.11429%206.25714%207.45714L10.8%2012L6.25714%2016.5429C5.91429%2016.8857%205.91429%2017.4%206.25714%2017.7429C6.42857%2017.9143%206.6%2018%206.85714%2018C7.11429%2018%207.28571%2017.9143%207.45714%2017.7429L12%2013.2L16.5429%2017.7429C16.7143%2017.9143%2016.9714%2018%2017.1429%2018C17.3143%2018%2017.5714%2017.9143%2017.7429%2017.7429C18.0857%2017.4%2018.0857%2016.8857%2017.7429%2016.5429L13.2%2012L17.7429%207.45714C18.0857%207.11429%2018.0857%206.6%2017.7429%206.25714Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 100%;
+			border: 0;
+			box-shadow: none;
+			cursor: pointer;
+			height: 24px;
+			opacity: 1;
+			outline: none;
+			position: absolute;
+			right: 8px;
+			top: 8px;
+			transition: opacity 0.2s;
+			width: 24px;
+
+			svg {
+				display: none;
+			}
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+	}
+
+	&__strip {
+		align-items: center;
+		background: rgba($white, 0.0625);
+		display: flex;
+		height: 52px;
+		padding: $unit1 $unit2;
+
+		&__icon {
+			flex: 0 0 28px;
+			width: 28px;
+		}
+
+		&__backspace {
+			cursor: pointer;
+			flex: 0 0 28px;
+			transition: opacity 0.2s;
+			width: 28px;
+
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+
+		&__number {
+			flex: 1;
+			padding: 0 $unit0;
+
+			input {
+				background: transparent;
+				border: 0;
+				color: $white;
+				direction: rtl;
+				font-size: 2.1rem;
+				font-weight: 800;
+  				overflow: hidden;
+  				text-align: center;
+  				text-overflow: ellipsis;
+  				white-space: nowrap;
+  				width: 100%;
+
+				&:focus {
+					direction: ltr;
+					outline: none;
+				}
+			}
+		}
+	}
+
+	&--light {
+		background: $white;
+		border: 0;
+
+		.Vlt-dialpad {
+			&__key {
+				&__main {
+					color: $black;
+				}
+
+				&__sub {
+					color: $grey-dark;
+				}
+
+				&:hover {
+					background: $grey-lighter;
+				}
+
+				&:active {
+					background: $grey-light;
+				}
+
+				&--nohover {
+					&:hover {
+						background: transparent;
+					}
+				}
+			}
+
+			&__header {
+				color: $grey-darker;
+
+				&__dismiss {
+					$fill-color: encode-hex-code($black);
+					background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M17.7429%206.25714C17.4%205.91429%2016.8857%205.91429%2016.5429%206.25714L12%2010.8L7.45714%206.25714C7.11429%205.91429%206.6%205.91429%206.25714%206.25714C5.91429%206.6%205.91429%207.11429%206.25714%207.45714L10.8%2012L6.25714%2016.5429C5.91429%2016.8857%205.91429%2017.4%206.25714%2017.7429C6.42857%2017.9143%206.6%2018%206.85714%2018C7.11429%2018%207.28571%2017.9143%207.45714%2017.7429L12%2013.2L16.5429%2017.7429C16.7143%2017.9143%2016.9714%2018%2017.1429%2018C17.3143%2018%2017.5714%2017.9143%2017.7429%2017.7429C18.0857%2017.4%2018.0857%2016.8857%2017.7429%2016.5429L13.2%2012L17.7429%207.45714C18.0857%207.11429%2018.0857%206.6%2017.7429%206.25714Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+				}
+			}
+
+			&__strip {
+				background: $grey-lighter;
+
+				&__number {
+					input {
+						color: $grey-darker;
+					}
+				}
+			}
+		}
+	}
+}

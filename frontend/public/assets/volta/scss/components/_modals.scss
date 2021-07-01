@@ -1,0 +1,223 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+@keyframes scaleUp {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(1000px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+}
+
+@keyframes scaleDown {
+
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(1000px);
+  }
+}
+
+.Vlt-modal {
+	align-items: center;
+	background: none;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	top: 0;
+	transform: scale(0);
+	transition: background 0.5s;
+	width: 100vw;
+	z-index: $z-index-modals;
+
+	&__panel {
+		background: $white;
+		border-radius: 6px;
+		box-shadow: 0 30px 40px rgba($black, 0.2);
+		display: flex;
+		flex-flow: column;
+		max-height: 95vh;
+		padding: $unit4;
+		position: relative;
+		width: calc(100vw - 20px);
+
+		@media #{$M-plus} {
+			width: 400px;
+		}
+
+		@media #{$S-only} {
+			margin-bottom: 80px;
+			margin-top: 80px;
+			max-height: calc(70vh);
+		}
+
+		p {
+			color: $black;
+		}
+	}
+
+	&__header {
+		flex-shrink: 0;
+		padding-bottom: 8px;
+
+		.Vlt-icon {
+			margin-bottom: $unit3;
+		}
+	}
+
+	&__dismiss {
+		$fill-color: encode-hex-code($black);
+		background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M17.7429%206.25714C17.4%205.91429%2016.8857%205.91429%2016.5429%206.25714L12%2010.8L7.45714%206.25714C7.11429%205.91429%206.6%205.91429%206.25714%206.25714C5.91429%206.6%205.91429%207.11429%206.25714%207.45714L10.8%2012L6.25714%2016.5429C5.91429%2016.8857%205.91429%2017.4%206.25714%2017.7429C6.42857%2017.9143%206.6%2018%206.85714%2018C7.11429%2018%207.28571%2017.9143%207.45714%2017.7429L12%2013.2L16.5429%2017.7429C16.7143%2017.9143%2016.9714%2018%2017.1429%2018C17.3143%2018%2017.5714%2017.9143%2017.7429%2017.7429C18.0857%2017.4%2018.0857%2016.8857%2017.7429%2016.5429L13.2%2012L17.7429%207.45714C18.0857%207.11429%2018.0857%206.6%2017.7429%206.25714Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		border: 0;
+		box-shadow: none;
+		cursor: pointer;
+		height: 24px;
+		opacity: 1;
+		position: absolute;
+		right: 16px;
+		top: 16px;
+		transition: opacity 0.2s;
+		width: 24px;
+
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	&__footer {
+		flex-shrink: 0;
+		margin-bottom: -$unit1;
+
+		&--small {
+			margin: 0 -20px -20px;
+			padding-top: $unit0;
+			position: relative;
+
+			&:before {
+				@extend .Vlt-elevation--1;
+				bottom: -12px;
+				content: '';
+				left: -12px;
+				position: absolute;
+				right: -12px;
+				top: 0;
+			}
+		}
+
+		.Vlt-btn {
+			@extend %Vlt-btn--app;
+			margin-bottom: 0;
+			min-width: 75px;
+		}
+	}
+
+	&_visible {
+		background: rgba($black, 0.5);
+		opacity: 1;
+		transform: scale(1) translateY(0px);
+
+		.Vlt-modal__panel {
+			animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+	}
+
+	&--out {
+		background: none;
+		opacity: 0;
+		transform: scale(0);
+
+		.Vlt-modal__panel {
+			animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		}
+	}
+
+	&--large {
+		@media #{$M-plus} {
+			.Vlt-modal__panel {
+				width: 630px;
+			}
+		}
+	}
+
+	&--message {
+		text-align: center;
+
+		.Vlt-modal__content {
+			text-align: center;
+		}
+	}
+
+	&__content {
+		-webkit-overflow-scrolling: touch;
+		flex: auto; // not flex: 1 because IE11 needs flex-basis: auto or it gives it a 0 height
+		max-height: calc(95vh - 122px); // otherwise it overflows in IE
+		overflow-x: hidden; // otherwise IE11 shows a scrollbar on forms
+		overflow-y: auto;
+		padding-bottom: $unit3;
+
+		&--message {
+			text-align: center;
+		}
+	}
+
+	&--form {
+		text-align: left;
+	}
+
+	&--small {
+		.Vlt-modal__header {
+			.Vlt-icon {
+				margin-bottom: $unit2;
+			}
+		}
+
+		.Vlt-modal__panel {
+			padding: $unit3;
+		}
+
+		.Vlt-modal__sticky {
+			padding: $unit2 0;
+			position: relative;
+
+			&:before {
+				background-color: $grey-light;
+				content: '';
+				height: 1px;
+				left: -$unit3;
+				position: absolute;
+				right: -$unit3;
+				top: 0;
+			}
+		}
+
+		.Vlt-modal__footer {
+			&--small {
+				margin: 0 -12px -12px;
+			}
+		}
+	}
+}
+
+body.Vlt-body--modal-open {
+	overflow: hidden;
+
+	main {
+		overflow: hidden;
+	}
+}
+

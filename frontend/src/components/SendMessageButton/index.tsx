@@ -5,10 +5,12 @@ import validator from "validator";
 import { useEffect, useState } from "react";
 import { useVids } from "components/VidsProvider";
 import { useTemplate } from "components/TemplateProvider";
+import SentDialog from "components/SentDialog";
 
 function SendMessageButton() {
   const [sending, setSending] = useState<boolean>(false);
   const [isClean, setIsClean] = useState<boolean>(false);
+  const [sentDialogOpen, setSentDialogOpen] = useState<boolean>(false);
   const { selectedTemplate, targetPhoneNumber } = useTemplate();
   const { sendRequest } = useVids();
 
@@ -52,6 +54,7 @@ function SendMessageButton() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
+      setSentDialogOpen(true);
     } catch (err) {
       console.error(err);
     } finally {
@@ -85,13 +88,19 @@ function SendMessageButton() {
   )
 
   return (
-    <button
-      className="Vlt-btn Vlt-btn--primary Vlt-btn--app"
-      onClick={handleSendMessageClick}
-      disabled={sending || !isClean}
-    >
-      Send Templated Message
-    </button>
+    <>
+      <button
+        className="Vlt-btn Vlt-btn--primary Vlt-btn--app"
+        onClick={handleSendMessageClick}
+        disabled={sending || !isClean}
+      >
+        Send Templated Message
+      </button>
+      <SentDialog
+        visible={sentDialogOpen}
+        setVisible={setSentDialogOpen}
+      />
+    </>
   )
 }
 

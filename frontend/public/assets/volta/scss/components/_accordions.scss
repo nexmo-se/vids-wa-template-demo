@@ -1,0 +1,162 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-accordion__content,
+.Vlt-js-accordion__content {
+	height: 0;
+	overflow: hidden;
+	transition: height 0.3s;
+
+	&_open {
+		height: auto;
+		overflow: visible;
+	}
+}
+
+.Vlt-js-accordion__trigger {
+	cursor: pointer;
+}
+
+.Vlt-accordion {
+	border-bottom: 1px solid $grey-dark;
+
+	&__trigger {
+		@extend .reset-button;
+		border-top: 1px solid $grey-dark;
+		cursor: pointer;
+		display: flex;
+		font-size: 1.8rem;
+		font-weight: 800;
+		line-height: 2.4rem;
+		padding: 15px 24px 15px 0;
+		position: relative;
+		text-align: left;
+		transition: margin 0.2s;
+		width: 100%;
+
+		&:first-child {
+			border-top: 0;
+		}
+
+		span {
+			flex: 1;
+		}
+
+		svg {
+			flex: 0 0 24px;
+			height: 24px;
+			margin-right: 24px;
+			width: 24px;
+		}
+
+		&:before,
+		&:after {
+			$fill-color: encode-hex-code($black);
+			background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2020%2020%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M3.38326%207.96544C3.58628%207.68629%203.97717%207.62457%204.25632%207.82759L9.99983%2012.0047L15.7433%207.82759C16.0225%207.62457%2016.4134%207.68629%2016.6164%207.96544C16.8194%208.2446%2016.7577%208.63549%2016.4785%208.83851L10.3674%2013.283C10.1483%2013.4423%209.85138%2013.4423%209.63222%2013.283L3.52111%208.83851C3.24195%208.63549%203.18023%208.2446%203.38326%207.96544Z%22%2F%3E%0A%3C%2Fsvg%3E');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 22px;
+			content: '';
+			display: block;
+			flex: 0 0 24px;
+			height: 24px;
+			width: 24px;
+		}
+
+		&:after {
+			position: absolute;
+			right: 0;
+			transition: transform 0.2s;
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&_active {
+			+ .Vlt-accordion__content + .Vlt-accordion__trigger {
+				margin-top: 23px;
+			}
+
+			&:before,
+			&:after {
+				transform: rotate(180deg);
+			}
+		}
+
+		&--noborder {
+			& + .Vlt-accordion__content {
+				border-bottom: 0; // Supporting legacy
+			}
+		}
+	}
+
+	&--icons,
+	&--chevron-left,
+	&--plus-minus {
+		.Vlt-accordion__content {
+			padding-left: 48px;
+		}
+	}
+
+	&--chevron-left,
+	&--plus-minus {
+		.Vlt-accordion__trigger {
+			&:before {
+				display: block;
+				margin-right: 24px;
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	&--plus-minus {
+		.Vlt-accordion__trigger {
+			justify-content: left;
+
+			&:before {
+				$fill-color: encode-hex-code($black);
+				background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M12.75%203.5C12.75%203.08579%2012.4142%202.75%2012%202.75C11.5858%202.75%2011.25%203.08579%2011.25%203.5V11.25H3.5C3.08579%2011.25%202.75%2011.5858%202.75%2012C2.75%2012.4142%203.08579%2012.75%203.5%2012.75H11.25V20.5C11.25%2020.9141%2011.5858%2021.25%2012%2021.25C12.4142%2021.25%2012.75%2020.9141%2012.75%2020.5V12.75H20.5C20.9141%2012.75%2021.25%2012.4142%2021.25%2012C21.25%2011.5858%2020.9141%2011.25%2020.5%2011.25H12.75V3.5Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+			}
+
+			&_active {
+				&:before {
+					$fill-color: encode-hex-code($black);
+					background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20style%3D%22fill%3A#{$fill-color}%3B%22%20d%3D%22M3.5%2011C3.08579%2011%202.75%2011.3358%202.75%2011.75C2.75%2012.1642%203.08579%2012.5%203.5%2012.5H20.5C20.9141%2012.5%2021.25%2012.1642%2021.25%2011.75C21.25%2011.3358%2020.9141%2011%2020.5%2011H3.5Z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+					transform: none;
+				}
+			}
+		}
+	}
+
+	&__content {
+
+		&:last-of-type {
+			&.Vlt-accordion__content_open {
+				padding-bottom: 28px;
+			}
+		}
+
+		&--noborder {
+			border: 0;
+		}
+	}
+
+	&--large {
+		.Vlt-accordion__trigger {
+			font-size: 2rem;
+			line-height: 2.5rem;
+			padding: 19px 24px 20px 0;
+		}
+
+		.Vlt-accordion__trigger_active {
+			+ .Vlt-accordion__content + .Vlt-accordion__trigger {
+				margin-top: 28px;
+			}
+		}
+	}
+}

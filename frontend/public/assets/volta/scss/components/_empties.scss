@@ -1,0 +1,75 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-empty {
+	align-items: center;
+	display: flex;
+	flex-flow: row wrap;
+	height: 100%;
+	justify-content: center;
+	padding: $unit2 0;
+	text-align: center;
+	width: 100%;
+
+	&:before {
+		background-image: url('data:image/svg+xml,%3Csvg%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Ccircle%20cx%3D%2260%22%20cy%3D%2260%22%20r%3D%2260%22%20fill%3D%22%23E1E2E6%22%2F%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M42.75%2038.4375C42.75%2037.6436%2043.3936%2037%2044.1875%2037H75.812C76.606%2037%2077.25%2037.6436%2077.25%2038.4375C77.25%2039.2314%2076.606%2039.875%2075.812%2039.875H44.1875C43.3936%2039.875%2042.75%2039.2314%2042.75%2038.4375ZM49.938%2054.25C50.731%2054.25%2051.375%2054.8936%2051.375%2055.6875V60H68.625V55.6875C68.625%2054.8936%2069.269%2054.25%2070.062%2054.25C70.856%2054.25%2071.5%2054.8936%2071.5%2055.6875V61.438C71.5%2062.231%2070.856%2062.875%2070.062%2062.875H49.938C49.144%2062.875%2048.5%2062.231%2048.5%2061.438V55.6875C48.5%2054.8936%2049.144%2054.25%2049.938%2054.25ZM38.4375%2045.625C37.6436%2045.625%2037%2046.2686%2037%2047.0625V78.688C37%2079.481%2037.6436%2080.125%2038.4375%2080.125H81.562C82.356%2080.125%2083%2079.481%2083%2078.688V47.0625C83%2046.2686%2082.356%2045.625%2081.562%2045.625H38.4375ZM39.875%2077.25V48.5H80.125V77.25H39.875Z%22%20fill%3D%22%23131415%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: contain;
+		content: '';
+		flex: 0 0 100%;
+		height: 120px;
+	}
+
+	&__icon {
+		background-color: $grey-light;
+		border-radius: 50%;
+		display: block;
+		height: 120px;
+		position: relative;
+		width: 120px;
+
+		svg {
+			height: 60px;
+			left: 30px;
+			position: absolute;
+			top: 30px;
+			width: 60px;
+		}
+	}
+
+	&__header {
+		flex: 0 0 100%;
+		font-size: 1.6rem;
+		font-weight: 600;
+		line-height: 2.3rem;
+		margin-bottom: -8px;
+		margin-top: $unit3;
+	}
+
+	&__content {
+		color: $black;
+		flex: 0 0 100%;
+		margin-top: $unit2;
+
+		p {
+			color: $black;
+		}
+	}
+
+	&--search {
+		&:before {
+			background-image: url('data:image/svg+xml,%3Csvg%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Ccircle%20cx%3D%2260%22%20cy%3D%2260%22%20r%3D%2260%22%20fill%3D%22%23E1E2E6%22%2F%3E%0A%3Cpath%20d%3D%22M39.875%2055.6875C39.875%2047.0625%2047.062%2039.875%2055.687%2039.875C64.312%2039.875%2071.5%2047.0625%2071.5%2055.6875C71.5%2064.312%2064.312%2071.5%2055.687%2071.5C47.062%2071.5%2039.875%2064.312%2039.875%2055.6875ZM55.687%2037C45.338%2037%2037%2045.3375%2037%2055.6875C37%2066.037%2045.338%2074.375%2055.687%2074.375C58.85%2074.375%2061.725%2073.512%2064.312%2072.075L74.663%2082.425C75.238%2083%2076.1%2083%2076.675%2082.425L82.425%2076.675C83%2076.1%2083%2075.238%2082.425%2074.663L72.075%2064.312C73.512%2061.725%2074.375%2058.85%2074.375%2055.6875C74.375%2045.3375%2066.037%2037%2055.687%2037Z%22%20fill%3D%22%23131415%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+	}
+
+	&--icon {
+		&:before {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,791 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+$shadow-standard: 0 1px 0px rgba($black, 0.15);
+$shadow-active: inset 0 2px 3px rgba($black, 0.2);
+$shadow-tertiary: inset 0 0 0px 1px $black;
+
+@mixin btn-app-radius {
+	border-radius: 6px;
+
+	&.Vlt-btn--small {
+		border-radius: 5px;
+	}
+}
+
+%Vlt-btn {
+	align-items: center;
+	appearance: none;
+	border: 0;
+	border-radius: 48px;
+	cursor: pointer;
+	display: inline-block; // can't be inline-flex because of Safari
+	font-size: 1.4rem;
+	font-weight: 600;
+	justify-content: center;
+	line-height: 2.4rem; // needed for Safari
+	margin: $unit1 0;
+	min-height: 40px;
+	min-width: 40px;
+	outline: none;
+	padding: $unit1 14px; // both paddings added for IE alignment
+	text-align: center;
+	transition: all 0.3s;
+	vertical-align: middle;
+	white-space: nowrap;
+
+	&:focus {
+		outline: none;
+	}
+
+	&:active {
+		outline: none;
+	}
+
+	svg {
+		display: inline-block;
+		fill: $white;
+		height: 18px;
+		margin-right: 8px;
+		margin-top: -2px;
+		vertical-align: middle;
+		width: 18px;
+
+		.vlt-btn--large & {
+			margin-right: 10px;
+		}
+	}
+
+	&:disabled,
+	&.Vlt-btn--disabled,
+	&.Vlt-btn_disabled {
+		@extend %disabled-btn-style;
+	}
+}
+
+.Vlt-btn {
+	@extend %Vlt-btn;
+
+	&--app {
+		@extend %Vlt-btn--app;
+	}
+
+	&--block {
+		width: 100%;
+	}
+
+	&--outline {
+		@extend %Vlt-btn--outline;
+	}
+
+	&--small {
+		@extend %Vlt-btn--small;
+	}
+
+	&--large {
+		@extend %Vlt-btn--large;
+	}
+
+	&--primary {
+		@extend %Vlt-btn--primary;
+	}
+
+	&--secondary {
+		@extend %Vlt-btn--secondary;
+	}
+
+	&--tertiary {
+		@extend %Vlt-btn--tertiary;
+	}
+
+	&--quaternary {
+		@extend %Vlt-btn--quaternary;
+	}
+
+	&--indigo {
+		@extend %Vlt-btn--indigo;
+	}
+
+	&--orange {
+		@extend %Vlt-btn--orange;
+	}
+
+	&--destructive {
+		@extend %Vlt-btn--destructive;
+	}
+
+	&--white {
+		@extend %Vlt-btn--white;
+	}
+
+	&--icon {
+		@extend %Vlt-btn--icon;
+	}
+
+	&--icon-right {
+		@extend %Vlt-btn--icon-right;
+	}
+
+	& + & {
+		margin-left: $unit1;
+	}
+
+	&--nomargin {
+		margin: 0;
+	}
+}
+
+%Vlt-btn--app {
+	@include btn-app-radius;
+}
+
+%Vlt-btn--small {
+	font-size: 1.2rem;
+	line-height: 1.6rem; //needed for Safari
+	min-height: 32px;
+	min-width: 32px;
+	padding: $unit1 12px;
+
+	svg {
+		height: 16px;
+		width: 16px;
+	}
+}
+
+%Vlt-btn--large {
+	font-size: 1.6rem;
+	line-height: 2.4rem; //needed for Safari
+	margin: $unit1 0 $unit2;
+	min-height: 48px;
+	min-width: 48px;
+	padding: 12px 24px;
+
+	svg {
+		height: 20px;
+		margin-right: 14px;
+		margin-top: -3px;
+		width: 20px;
+
+		&  span {
+			margin-left: $unit1;
+		}
+	}
+}
+
+%Vlt-btn--icon {
+	svg {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+}
+
+%Vlt-btn--icon-right {
+	svg {
+		margin-left: 8px;
+		margin-right: 0;
+	}
+
+	&.Vlt-btn--large {
+		svg {
+			margin-left: 14px;
+		}
+	}
+}
+
+%Vlt-btn--primary {
+	background: $purple-dark;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($purple-dark, 10);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: darken($purple-dark, 15);
+	}
+
+	&.Vlt-btn--outline {
+		color: $purple-dark;
+
+		svg {
+			fill: $purple-dark;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($purple-dark, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($purple-dark, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--secondary {
+	background: $black;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: lighten($black, 20);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: lighten($black, 30);
+	}
+
+	&.Vlt-btn--outline {
+		color: $black;
+
+		svg {
+			fill: $black;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($black, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($black, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--tertiary {
+	background: $grey-light;
+	color: $black;
+
+	svg {
+		fill: $black;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($grey-light, 6);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: $grey;
+	}
+
+	&.Vlt-btn--outline {
+		color: $grey-light;
+
+		svg {
+			fill: $grey-light;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($grey, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($grey, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--destructive {
+	background: $red;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($red, 10);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: darken($red, 15);
+	}
+
+	&.Vlt-btn--outline {
+		color: $red;
+
+		svg {
+			fill: $red;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($red, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($red, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--quaternary {
+	background: $green;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($green, 6);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: darken($green, 10);
+	}
+
+	&.Vlt-btn--outline {
+		color: $green;
+
+		svg {
+			fill: $green;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($green, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($green, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--indigo {
+	background: $indigo;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($indigo, 6);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: darken($indigo, 10);
+	}
+
+	&.Vlt-btn--outline {
+		color: $indigo;
+
+		svg {
+			fill: $indigo;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($indigo, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($indigo, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--orange {
+	background: $orange;
+	color: $white;
+
+	svg {
+		fill: $white;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: darken($orange, 6);
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: darken($orange, 10);
+	}
+
+	&.Vlt-btn--outline {
+		color: $orange;
+
+		svg {
+			fill: $orange;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($orange, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($orange, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--white {
+	background: $white;
+	color: $black;
+
+	svg {
+		fill: $black;
+	}
+
+	&:hover,
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):focus {
+		background: $grey-light;
+	}
+
+	&:not(.Vlt-btn--no-focus):not(.Vlt-btn--outline):active,
+	&.Vlt-btn_active {
+		background: $grey;
+	}
+
+	&.Vlt-btn--outline {
+		color: $white;
+
+		svg {
+			fill: $white;
+		}
+
+		&:hover,
+		&:not(.Vlt-btn--no-focus):focus {
+			background: rgba($white, 0.1);
+		}
+
+		&:not(.Vlt-btn--no-focus):active,
+		&.Vlt-btn_active {
+			background: rgba($white, 0.2);
+		}
+	}
+}
+
+%Vlt-btn--outline {
+	background-color: transparent;
+	box-shadow: inset 0 0 0 1px;
+
+	.Vlt-spinner {
+		&:before,
+		&:after {
+			border-color: currentColor transparent transparent;
+		}
+	}
+}
+
+.Vlt-text-btn,
+.Vlt-btn--link,
+%Vlt-text-btn {
+	@extend %Vlt-text-link;
+	@extend .reset-button;
+	border-radius: 0;
+	box-shadow: none;
+	cursor: pointer;
+	font-size: 1.5rem;
+	padding: 0;
+	white-space: nowrap;
+
+	svg {
+		fill: $purple-dark;
+	}
+
+	&:hover {
+		text-decoration: underline;
+		transform: none;
+	}
+
+	&:active {
+		box-shadow: none;
+	}
+
+	&:disabled,
+	&.Vlt-btn--disabled,
+	&.Vlt-btn_disabled {
+		@extend %disabled-btn-style;
+		background: none !important;
+	}
+}
+
+.Vlt-btn-group {
+	display: flex;
+
+	&:not(.Vlt-btn-group--app) {
+		.Vlt-btn {
+			&:first-child {
+				min-width: 44px;
+				padding-left: 20px;
+			}
+
+			&:last-child {
+				min-width: 44px;
+				padding-right: 20px;
+			}
+		}
+	}
+
+	.Vlt-btn {
+		@extend %Vlt-btn;
+		@extend %Vlt-btn--tertiary;
+		margin-left: 0;
+		margin-right: 0;
+
+		&:not(:first-child) {
+			border-bottom-left-radius: 0;
+			border-left: 0;
+			border-top-left-radius: 0;
+		}
+
+		&:not(:last-child) {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+
+		&:not(.Vlt-btn--no-focus):focus {
+			z-index: 2;
+		}
+	}
+
+	&--app {
+		.Vlt-btn {
+			background: $grey-light !important;
+			position: relative;
+			z-index: 1;
+
+			&:before {
+				border-radius: 5px;
+				bottom: 2px;
+				content: '';
+				left: 1px;
+				position: absolute;
+				right: 1px;
+				top: 2px;
+				transition: background 0.3s;
+				z-index: -1;
+			}
+
+			&:hover {
+				&:before {
+					background: $grey;
+				}
+			}
+
+			&.Vlt-btn_active {
+				color: $white !important;
+
+				svg {
+					fill: $white !important;
+				}
+
+				&:before {
+					background: $black;
+				}
+			}
+
+			&:first-child {
+				border-bottom-left-radius: 6px;
+				border-top-left-radius: 6px;
+
+				&:before {
+					left: 2px;
+				}
+			}
+
+			&:last-child {
+				border-bottom-right-radius: 6px;
+				border-top-right-radius: 6px;
+
+				&:before {
+					right: 2px;
+				}
+			}
+		}
+	}
+
+	&--small {
+		.Vlt-btn {
+			@extend %Vlt-btn--small;
+		}
+
+		&:not(.Vlt-btn-group--app) {
+			.Vlt-btn {
+				&:first-child {
+					min-width: 36px;
+					padding-left: 16px;
+				}
+
+				&:last-child {
+					min-width: 36px;
+					padding-right: 16px;
+				}
+			}
+		}
+	}
+
+	&--large {
+		.Vlt-btn {
+			@extend %Vlt-btn--large;
+		}
+
+		&:not(.Vlt-btn-group--app) {
+			.Vlt-btn {
+				&:first-child {
+					min-width: 52px;
+					padding-left: 28px;
+				}
+
+				&:last-child {
+					min-width: 52px;
+					padding-right: 28px;
+				}
+			}
+		}
+	}
+
+	&--icon {
+		.Vlt-btn {
+			@extend %Vlt-btn--icon;
+		}
+	}
+
+	&--hover {
+		// This is for hover buttons, not for button groups on hover
+		border: 0 !important;
+		margin-top: -1px;
+		opacity: 0;
+		padding: 0 !important;
+		position: absolute;
+		right: $unit2;
+		transition: all 0.3s;
+		z-index: -1;
+	}
+
+	&--inline {
+		display: inline-flex;
+	}
+}
+
+.Vlt-btn-on-hover {
+	position: relative;
+
+	&:hover {
+		.Vlt-btn-group--hover {
+			background-color: transparent;
+			opacity: 1;
+			z-index: 2;
+		}
+	}
+
+	&:not(tr):not(td):not(table) {
+		.Vlt-btn-group--hover {
+			margin-top: 0px;
+			top: -$unit2; // this is both here and above in the form of margin-top because that one works in tables and this works everywhere else
+		}
+	}
+}
+
+.Vlt-text-link,
+%Vlt-text-link {
+	color: $purple-dark;
+	cursor: pointer;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+
+	&:hover {
+		color: $purple-darker;
+		text-decoration: underline;
+	}
+
+	&:active {
+		color: $purple-darker;
+	}
+
+	&:visited {
+		color: $purple-dark;
+
+		&:hover {
+			color: $purple-darker;
+		}
+	}
+
+	&.Vlt-black {
+		color: $black;
+		font-weight: 600;
+		position: relative;
+
+		&:after {
+			background-color: $black;
+			bottom: -2px;
+			content: '';
+			height: 1px;
+			left: 0;
+			position: absolute;
+			width: 100%;
+		}
+
+		&:hover {
+			color: $grey-darker;
+			text-decoration: none;
+
+			&:after {
+				background-color: $grey-darker;
+			}
+		}
+
+		&:active {
+			color: $grey-darker;
+		}
+
+		&:visited {
+			color: $black;
+		}
+	}
+}
+
+.reset-button {
+	appearance: none;
+	background: none;
+	border: 0;
+	outline: none;
+	padding: 0;
+}
+
+%disabled-btn-style {
+	background: rgba($grey, 0.5);
+	border: 0;
+	box-shadow: none;
+	color: $grey-dark;
+	pointer-events: none;
+
+	svg {
+		fill: $grey-dark;
+	}
+}

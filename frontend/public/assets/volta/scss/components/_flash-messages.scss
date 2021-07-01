@@ -1,0 +1,36 @@
+//
+// Copyright (c) 2018-present, Vonage. All rights reserved.
+//
+
+.Vlt-flash {
+	box-shadow: inset 0 0 0 1px $grey, 0 4px 10px rgba($deep-black, 0.2);
+	left: 50%;
+	margin-left: -45%;
+	position: fixed;
+	top: -100%;
+	transition: top 0.3s;
+	width: 90%;
+	z-index: $z-index-flash;
+
+	&.Vlt-flash_visible {
+		top: 20px;
+	}
+
+	&--bottom {
+		bottom: -100%;
+		top: auto;
+		transition: bottom 0.3s;
+
+		&.Vlt-flash_visible {
+			bottom: 20px;
+			top: auto;
+		}
+	}
+
+	&--small {
+		@media #{$L-plus} {
+			margin-left: -25%;
+			width: 50%;
+		}
+	}
+}
