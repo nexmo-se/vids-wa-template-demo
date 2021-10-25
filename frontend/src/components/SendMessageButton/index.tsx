@@ -70,18 +70,20 @@ function SendMessageButton() {
       }
 
       const countParameters = selectedTemplate.body.split(/{{\d+}}/g).length - 1;
-      if (countParameters === 0) {
-        setIsClean(
-          targetPhoneNumber !== undefined &&
-          validator.isMobilePhone(targetPhoneNumber)
-        ) 
+      if (countParameters === 0) {        
+        // Check if the targetPhoneNumber is not empty
+        setIsClean(targetPhoneNumber !== undefined && !validator.isEmpty(targetPhoneNumber))
       } else {
         const paramatersHasValue = !(lodash(lodash(countParameters).times()).map(
           (_, index) => {
             return { isEmpty: lodash(selectedTemplate.bodyValues[index]).isEmpty() }
           }
         ).find({ isEmpty: true }))
-        setIsClean(paramatersHasValue)
+        setIsClean(
+          paramatersHasValue &&
+          targetPhoneNumber !== undefined &&
+          !validator.isEAN(targetPhoneNumber)
+        )
       }
     },
     [selectedTemplate, targetPhoneNumber]
