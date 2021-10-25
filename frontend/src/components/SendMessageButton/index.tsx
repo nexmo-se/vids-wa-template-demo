@@ -9,7 +9,6 @@ function SendMessageButton() {
   const { selectedTemplate, targetPhoneNumber } = useTemplate();
 
   async function handleSendMessageClick() {
-    console.log(selectedTemplate);
     try {
       setSending(true);
 
