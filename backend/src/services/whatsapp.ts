@@ -3,7 +3,6 @@ import Message from "../models/message";
 
 import FetchService from "./fetch";
 import NexmoService from "./nexmo";
-import VidsService from "./vids";
 
 interface ISendMessage {
   message: Message;
